@@ -1,5 +1,7 @@
 # ChildFundCMS
 
+visit: https://childfundcms.herokuapp.com/
+
 Based on the tutorial here: 
 
 https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku
