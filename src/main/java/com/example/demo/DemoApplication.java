@@ -11,7 +11,7 @@ import org.springframework.stereotype.*;
 public class DemoApplication {
        
        @RequestMapping("/")
-       @ReqponseBody
+       @ResponseBody
        String home() {
          return "Hello World ChildFundCMS!";
 
