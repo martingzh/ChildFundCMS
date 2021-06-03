@@ -90,12 +90,14 @@
                         var labels = [];
                         var healthScores = [];
                         /*[# th:each="score : ${health.scores}"]*/
-                        labels.push([[${score.date}]]);
+
+                        labels.push("[[${score.date}]]");
                         healthScores.push("[[${score.score}]]");
                         /*[/]*/
                         var educationScores = [];
                         /*[# th:each="score : ${education.scores}"]*/
                         educationScores.push("[[${score.score}]]");
+
                         /*[/]*/
 
                         var ctx = document.getElementById('trendChart').getContext('2d');
