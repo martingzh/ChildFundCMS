@@ -13,45 +13,46 @@
     <div class="row">
         <div class="col-3">
             <!-- Child Quick Info -->
-            <h2 th:text="${child.name} + ' - ' + ${child.id}"></h2>
+            <h2 class="display-4" th:text="${child.name}"></h2>
+            <h3 class="display-6" th:text="'ID: ' + ${child.id}"></h3>
             <table class="table table-borderless">
                 <tbody>
-                    <tr>
-                        <th scope="row">Age</th>
-                        <td th:text="${child.age}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">DOB</th>
-                        <td th:text="${#temporals.format(child.dateOfBirth, 'dd-MM-yyyy')}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Sex</th>
-                        <td th:text="${child.sex}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">LifeStage</th>
-                        <td th:text="${child.lifeStage}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Location</th>
-                        <td th:text="${child.village}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">School</th>
-                        <td th:text="${child.school}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Grade</th>
-                        <td th:text="${child.grade}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Cluster/Family Group</th>
-                        <td th:text="${child.family}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Last Update</th>
-                        <td th:text="${#temporals.format(child.updated, 'dd-MM-yyyy')}"></td>
-                    </tr>
+                <tr>
+                    <th scope="row">Age</th>
+                    <td th:text="${child.age}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">DOB</th>
+                    <td th:text="${#temporals.format(child.dateOfBirth, 'dd-MM-yyyy')}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Sex</th>
+                    <td th:text="${child.sex}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">LifeStage</th>
+                    <td th:text="${child.lifeStage}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Location</th>
+                    <td th:text="${child.village}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">School</th>
+                    <td th:text="${child.school}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Grade</th>
+                    <td th:text="${child.grade}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Cluster/Family Group</th>
+                    <td th:text="${child.family}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Last Update</th>
+                    <td th:text="${#temporals.format(child.updated, 'dd-MM-yyyy')}"></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -59,12 +60,12 @@
 
             <div class="card m-3">
                 <div class="card-body">
-                    <h3>SAFETY</h3>
+                    <h3 class="display-5">SAFETY</h3>
                 </div>
             </div>
             <div class="card m-3">
                 <div class="card-body">
-                    <h3>HEALTH</h3>
+                    <h3 class="display-5">HEALTH</h3>
                     <table class="table table-borderless table-sm">
                         <tbody>
                         <tr>
@@ -79,6 +80,24 @@
                         <tr th:if="${health.healthRemediation != null}">
                             <th scope="row">What action has been taken to address the health issue?</th>
                             <td th:text="${health.healthRemediation}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Immunized</th>
+                            <td th:unless="${health.immunized != null}" class="table-warning">Unknown</td>
+                            <td th:if="${health.immunized != null}"
+                                th:text="${health.immunized} ? 'Yes' : 'No'"
+                                th:class="${health.immunized} ? 'table-success' : 'table-danger'"></td>
+                        </tr>
+                        <tr th:if="${health.immunized}">
+                            <th scope="row">Immunization Date</th>
+                            <td th:text="${health.immunizationDate != null ? health.immunizationDate : 'Unknown'}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Parent/Caretaker has participted in Nutrition Assessment</th>
+                            <td th:unless="${health.nutritionAssessment != null}" class="table-warning">Unknown</td>
+                            <td th:if="${health.nutritionAssessment != null}"
+                                th:text="${health.nutritionAssessment} ? 'Yes' : 'No'"
+                                th:class="${health.nutritionAssessment} ? 'table-success' : 'table-danger'"></td>
                         </tr>
                         </tbody>
                     </table>
@@ -125,12 +144,12 @@
             </div>
             <div class="card m-3">
                 <div class="card-body">
-                    <h3>EDUCATION</h3>
+                    <h3 class="display-5">EDUCATION</h3>
                 </div>
             </div>
             <div class="card m-3">
                 <div class="card-body">
-                    <h3>PROGRAM INVOLVEMENT</h3>
+                    <h3 class="display-5">PROGRAM INVOLVEMENT</h3>
                 </div>
             </div>
 
