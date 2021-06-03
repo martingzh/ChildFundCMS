@@ -6,7 +6,7 @@ public interface CrudRepository<Child, Community> {
 
     String create(Child child);
 
-    Child get(String firstName);
+    Child get(String Id);
 
     List<Child> getAll();
 
