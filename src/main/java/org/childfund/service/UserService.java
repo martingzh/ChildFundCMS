@@ -1,5 +1,7 @@
 package org.childfund.service;
 
+import org.childfund.models.Child;
+import org.childfund.models.Community;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
-public class UserService {
+public class UserService implements CrudRepository<Child, Community> {
 
     @Autowired
     private DataSource dataSource;
@@ -28,4 +30,23 @@ public class UserService {
         return "";
     }
 
+    @Override
+    public String Create(Child child) {
+        return null;
+    }
+
+    @Override
+    public Child Retrieve(String firstName) {
+        return null;
+    }
+
+    @Override
+    public void Update(Child child) {
+
+    }
+
+    @Override
+    public void Delete(String Id) {
+
+    }
 }
