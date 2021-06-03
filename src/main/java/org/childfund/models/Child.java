@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package org.childfund.models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

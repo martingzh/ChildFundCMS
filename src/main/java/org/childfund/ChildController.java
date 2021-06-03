@@ -1,7 +1,7 @@
-package com.example.demo;
+package org.childfund;
 
-import com.example.demo.models.Child;
-import com.example.demo.models.Health;
+import org.childfund.models.Child;
+import org.childfund.models.Health;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

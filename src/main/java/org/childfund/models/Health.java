@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package org.childfund.models;
 
 import org.springframework.lang.Nullable;
 
