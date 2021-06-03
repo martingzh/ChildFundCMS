@@ -1,8 +1,5 @@
 package org.childfund.models;
 
-import java.time.LocalDate;
-import java.util.List;
-
 public class Education {
 
   public enum SchoolStatus {
@@ -22,37 +19,16 @@ public class Education {
     }
   }
 
-  private SchoolStatus status;
-  private List<Score> scores;
 
-  public Education(SchoolStatus status, List<Score> scores) {
-    this.status = status;
-    this.scores = scores;
-  }
+    private SchoolStatus status;
 
-  public SchoolStatus getStatus() {
-    return status;
-  }
-
-  public List<Score> getScores() {
-    return scores;
-  }
-
-  public static class Score {
-    private final LocalDate date;
-    private final int score;
-
-    public Score(LocalDate date, int score) {
-      this.date = date;
-      this.score = score;
+    public Education(
+            SchoolStatus status
+    ) {
+        this.status = status;
     }
 
-    public LocalDate getDate() {
-      return date;
+    public SchoolStatus getStatus() {
+        return status;
     }
-
-    public int getScore() {
-      return score;
-    }
-  }
 }

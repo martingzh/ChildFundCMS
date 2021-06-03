@@ -88,16 +88,16 @@
                     <script th:inline="javascript">
                     /*<![CDATA[*/
                         var labels = [];
+                        var safetyScores = [];
                         var healthScores = [];
-                        /*[# th:each="score : ${health.scores}"]*/
-
-                        labels.push("[[${score.date}]]");
-                        healthScores.push("[[${score.score}]]");
-                        /*[/]*/
                         var educationScores = [];
-                        /*[# th:each="score : ${education.scores}"]*/
-                        educationScores.push("[[${score.score}]]");
-
+                        var participationScores = [];
+                        /*[# th:each="score : ${scores}"]*/
+                        labels.push([[${score.date}]]);
+                        safetyScores.push("[[${score.safety}]]");
+                        healthScores.push("[[${score.health}]]");
+                        educationScores.push("[[${score.education}]]");
+                        participationScores.push("[[${score.participation}]]");
                         /*[/]*/
 
                         var ctx = document.getElementById('trendChart').getContext('2d');
@@ -106,6 +106,12 @@
                             data: {
                                 labels: labels,
                                 datasets: [{
+                                    label: 'Safety Score',
+                                    data: safetyScores,
+                                    fill: false,
+                                    borderColor: 'rgb(192, 192, 75)',
+                                    tension: 0.1
+                                },{
                                     label: 'Health Score',
                                     data: healthScores,
                                     fill: false,
@@ -116,6 +122,12 @@
                                     data: educationScores,
                                     fill: false,
                                     borderColor: 'rgb(192, 75, 192)',
+                                    tension: 0.1
+                                },{
+                                    label: 'Participation Score',
+                                    data: participationScores,
+                                    fill: false,
+                                    borderColor: 'rgb(192, 192, 192)',
                                     tension: 0.1
                                 }]
                             },
