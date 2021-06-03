@@ -88,7 +88,7 @@
                         var labels = [];
                         var scores = [];
                         /*[# th:each="score : ${health.scores}"]*/
-                        labels.push([[${score.date}]]);
+                        labels.push("[[${score.date}]]");
                         scores.push("[[${score.score}]]");
                         /*[/]*/
 

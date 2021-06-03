@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/partnersSearchBar.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/partnersSearchBar.js}">
+    </script>
+</head>
+<body>
+    <form autocomplete="off" action="">
+        <div class="autocomplete" style="width:300px;">
+          <input id="localPartnersSearchBar" type="text" name="localPartnersSearchBar" placeholder="Search Partners">
+        </div>
+    </form>
+    <script th:inline="javascript">
+        var partners = ["MBALE", "SOROTI", "BUSIA", "LANGO", "ACHOLI", "MASINDI", "KAMPALA", "JINJA", "KIBOGA"];
+        window.onload = autocomplete(document.getElementById("localPartnersSearchBar"), partners);
+    </script>
+</body>
+</html>
