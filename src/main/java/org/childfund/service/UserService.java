@@ -1,24 +1,13 @@
 package org.childfund.service;
 
-<<<<<<< HEAD
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+import org.apache.tomcat.util.json.JSONParser;
 import org.childfund.models.Child;
 import org.childfund.models.Community;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
-
-=======
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.tomcat.util.json.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
->>>>>>> 84f4404... Integration with postgres - part2
 @Component
 public class UserService implements CrudRepository<Child, Community> {
 
@@ -38,35 +27,27 @@ public class UserService implements CrudRepository<Child, Community> {
     } catch (Exception ex) {
       ex.printStackTrace();
     }
-<<<<<<< HEAD
-
-
-    @Override
-    public String create(Child child) {
-        return null;
-    }
-
-    @Override
-    public Child get(String Id) {
-        return null;
-    }
-
-    @Override
-    public List<Child> getAll() {
-        return null;
-    }
-
-    @Override
-    public void update(Child child, String[] params) {
-
-    }
-
-    @Override
-    public void delete(String Id) {
-
-    }
-=======
     return childId;
   }
->>>>>>> 84f4404... Integration with postgres - part2
+
+  @Override
+  public String create(Child child) {
+    return null;
+  }
+
+  @Override
+  public Child get(String Id) {
+    return null;
+  }
+
+  @Override
+  public List<Child> getAll() {
+    return null;
+  }
+
+  @Override
+  public void update(Child child, String[] params) {}
+
+  @Override
+  public void delete(String Id) {}
 }
