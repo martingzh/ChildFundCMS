@@ -20,6 +20,12 @@ then follow steps in the tutorial to build and run.
 mvn spring-boot:run
 ```
 
+## Helpful Links
+
+[Spring Boot](https://spring.io/projects/spring-boot#overview) For web framework
+[Thymeleaf](https://www.thymeleaf.org/documentation.html) For HTML Templating
+[BootStrap](https://getbootstrap.com/docs/5.0) For client-side UI
+
 ## JSON format
 
 The form collected from Kobotoolbox gets sent to our system via a POST when the form is submitted. An example of the JSON body:
