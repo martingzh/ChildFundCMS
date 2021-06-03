@@ -1,14 +1,19 @@
 package org.childfund.service;
 
 import org.childfund.models.Child;
-import org.childfund.models.Community;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public interface SearchChild extends CrudRepository<Child, Community>{
+@Component
+public interface SearchChild {
 
-    public List<Child> findAllChildren();
-    public List<Child> findAllChildrenByName(String firstName);
-    public Child findChildById(String Id);
+    List<Child> findAllChildren();
+
+    List<Child> findAllChildrenByName(String firstName);
+
+    List<Child> findAllChildrenByOtherName(String otherName);
+
+    Child findChildById(String Id);
 
 }
