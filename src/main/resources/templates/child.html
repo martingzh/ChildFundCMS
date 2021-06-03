@@ -66,41 +66,7 @@
             <div class="card m-3">
                 <div class="card-body">
                     <h3 class="display-5">HEALTH</h3>
-                    <table class="table table-borderless table-sm">
-                        <tbody>
-                        <tr>
-                            <th scope="row">Is the child's health satisfactory?</th>
-                            <td th:text="${health.satisfactory} ? 'Yes' : 'No'"
-                                th:class="${health.satisfactory} ? 'table-success' : 'table-danger'"></td>
-                        </tr>
-                        <tr th:if="${health.healthSituation != null}">
-                            <th scope="row">What is the health issue?</th>
-                            <td th:text="${health.healthSituation}"></td>
-                        </tr>
-                        <tr th:if="${health.healthRemediation != null}">
-                            <th scope="row">What action has been taken to address the health issue?</th>
-                            <td th:text="${health.healthRemediation}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Immunized</th>
-                            <td th:unless="${health.immunized != null}" class="table-warning">Unknown</td>
-                            <td th:if="${health.immunized != null}"
-                                th:text="${health.immunized} ? 'Yes' : 'No'"
-                                th:class="${health.immunized} ? 'table-success' : 'table-danger'"></td>
-                        </tr>
-                        <tr th:if="${health.immunized}">
-                            <th scope="row">Immunization Date</th>
-                            <td th:text="${health.immunizationDate != null ? health.immunizationDate : 'Unknown'}"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Parent/Caretaker has participted in Nutrition Assessment</th>
-                            <td th:unless="${health.nutritionAssessment != null}" class="table-warning">Unknown</td>
-                            <td th:if="${health.nutritionAssessment != null}"
-                                th:text="${health.nutritionAssessment} ? 'Yes' : 'No'"
-                                th:class="${health.nutritionAssessment} ? 'table-success' : 'table-danger'"></td>
-                        </tr>
-                        </tbody>
-                    </table>
+
                     <canvas id="healthChart" width="400" height="100"></canvas>
                     <script th:inline="javascript">
                     /*<![CDATA[*/
@@ -133,13 +99,42 @@
                             }
                         });
                     /*]]>*/
-
-
-
-
-
                     </script>
-
+                    <table class="table table-borderless table-sm">
+                        <tbody>
+                        <tr>
+                            <th scope="row" class="col-4">Is the child's health satisfactory?</th>
+                            <td th:text="${health.satisfactory} ? 'Yes' : 'No'"
+                                th:class="${health.satisfactory} ? 'table-success' : 'table-danger'"></td>
+                        </tr>
+                        <tr th:if="${health.healthSituation != null}">
+                            <th scope="row" class="col-4">What is the health issue?</th>
+                            <td th:text="${health.healthSituation}"></td>
+                        </tr>
+                        <tr th:if="${health.healthRemediation != null}">
+                            <th scope="row" class="col-4">What action has been taken to address the health issue?</th>
+                            <td th:text="${health.healthRemediation}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-4">Immunized</th>
+                            <td th:unless="${health.immunized != null}" class="table-warning">Unknown</td>
+                            <td th:if="${health.immunized != null}"
+                                th:text="${health.immunized} ? 'Yes' : 'No'"
+                                th:class="${health.immunized} ? 'table-success' : 'table-danger'"></td>
+                        </tr>
+                        <tr th:if="${health.immunized}">
+                            <th scope="row" class="col-4">Immunization Date</th>
+                            <td th:text="${health.immunizationDate != null ? health.immunizationDate : 'Unknown'}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-4">Parent/Caretaker has participted in Nutrition Assessment</th>
+                            <td th:unless="${health.nutritionAssessment != null}" class="table-warning">Unknown</td>
+                            <td th:if="${health.nutritionAssessment != null}"
+                                th:text="${health.nutritionAssessment} ? 'Yes' : 'No'"
+                                th:class="${health.nutritionAssessment} ? 'table-success' : 'table-danger'"></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="card m-3">
