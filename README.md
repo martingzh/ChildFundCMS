@@ -14,6 +14,12 @@ https://devcenter.heroku.com/articles/java-support
 
 then follow steps in the tutorial to build and run. 
 
+## Running Locally
+
+```
+mvn spring-boot:run
+```
+
 ## JSON format
 
 The form collected from Kobotoolbox gets sent to our system via a POST when the form is submitted. An example of the JSON body:
