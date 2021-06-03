@@ -1,6 +1,7 @@
 package org.childfund;
 
 import org.childfund.models.Child;
+import org.childfund.models.Education;
 import org.childfund.models.Health;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +36,7 @@ public class ChildController {
                 false,
                 "Child has Malaria",
                 "Malaria medication delivered",
-                false,
+                true,
                 null,
                 null,
                 List.of(
@@ -46,8 +47,19 @@ public class ChildController {
                         new Health.Score(LocalDate.now(), 80)
                 )
         );
+        Education education = new Education(
+                Education.SchoolStatus.IN_SCHOOL,
+                List.of(
+                        new Education.Score(LocalDate.now().minus(6, ChronoUnit.MONTHS), 50),
+                        new Education.Score(LocalDate.now().minus(4, ChronoUnit.MONTHS), 60),
+                        new Education.Score(LocalDate.now().minus(2, ChronoUnit.MONTHS), 70),
+                        new Education.Score(LocalDate.now().minus(1, ChronoUnit.MONTHS), 70),
+                        new Education.Score(LocalDate.now(), 75)
+                )
+        );
         model.addAttribute("child", child);
         model.addAttribute("health", health);
+        model.addAttribute("education", education);
         return "child";
     }
 }

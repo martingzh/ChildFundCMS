@@ -13,95 +13,109 @@
     <div class="row">
         <div class="col-3">
             <!-- Child Quick Info -->
-            <h2 th:text="${child.name} + ' - ' + ${child.id}"></h2>
+            <h2 class="display-4" th:text="${child.name}"></h2>
+            <h3 class="display-6" th:text="'ID: ' + ${child.id}"></h3>
             <table class="table table-borderless">
                 <tbody>
-                    <tr>
-                        <th scope="row">Age</th>
-                        <td th:text="${child.age}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">DOB</th>
-                        <td th:text="${#temporals.format(child.dateOfBirth, 'dd-MM-yyyy')}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Sex</th>
-                        <td th:text="${child.sex}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">LifeStage</th>
-                        <td th:text="${child.lifeStage}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Location</th>
-                        <td th:text="${child.village}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">School</th>
-                        <td th:text="${child.school}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Grade</th>
-                        <td th:text="${child.grade}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Cluster/Family Group</th>
-                        <td th:text="${child.family}"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Last Update</th>
-                        <td th:text="${#temporals.format(child.updated, 'dd-MM-yyyy')}"></td>
-                    </tr>
+                <tr>
+                    <th scope="row">Age</th>
+                    <td th:text="${child.age}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">DOB</th>
+                    <td th:text="${#temporals.format(child.dateOfBirth, 'dd-MM-yyyy')}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Sex</th>
+                    <td th:text="${child.sex}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">LifeStage</th>
+                    <td th:text="${child.lifeStage}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Location</th>
+                    <td th:text="${child.village}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">School</th>
+                    <td th:text="${child.school}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Grade</th>
+                    <td th:text="${child.grade}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Cluster/Family Group</th>
+                    <td th:text="${child.family}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Last Update</th>
+                    <td th:text="${#temporals.format(child.updated, 'dd-MM-yyyy')}"></td>
+                </tr>
                 </tbody>
             </table>
         </div>
         <div class="col">
 
+            <!-- Quick Scores -->
             <div class="card m-3">
                 <div class="card-body">
-                    <h3>SAFETY</h3>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col" data-bs-toggle="modal" data-bs-target="#safetyModal">
+                                Safety: 40%
+                            </div>
+                            <div class="col" data-bs-toggle="modal" data-bs-target="#healthModal">
+                                Health: 50%
+                            </div>
+                            <div class="col" data-bs-toggle="modal" data-bs-target="#educationModal">
+                                Education: 60%
+                            </div>
+                            <div class="col" data-bs-toggle="modal" data-bs-target="#participationModal">
+                                Participation: 90%
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Trend Lines -->
             <div class="card m-3">
                 <div class="card-body">
-                    <h3>HEALTH</h3>
-                    <table class="table table-borderless table-sm">
-                        <tbody>
-                        <tr>
-                            <th scope="row">Is the child's health satisfactory?</th>
-                            <td th:text="${health.satisfactory} ? 'Yes' : 'No'"
-                                th:class="${health.satisfactory} ? 'table-success' : 'table-danger'"></td>
-                        </tr>
-                        <tr th:if="${health.healthSituation != null}">
-                            <th scope="row">What is the health issue?</th>
-                            <td th:text="${health.healthSituation}"></td>
-                        </tr>
-                        <tr th:if="${health.healthRemediation != null}">
-                            <th scope="row">What action has been taken to address the health issue?</th>
-                            <td th:text="${health.healthRemediation}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <canvas id="healthChart" width="400" height="100"></canvas>
+                    <h3 class="display-6">Trends</h3>
+                    <canvas id="trendChart" width="400" height="100"></canvas>
                     <script th:inline="javascript">
                     /*<![CDATA[*/
                         var labels = [];
-                        var scores = [];
+                        var healthScores = [];
                         /*[# th:each="score : ${health.scores}"]*/
+
                         labels.push("[[${score.date}]]");
-                        scores.push("[[${score.score}]]");
+                        healthScores.push("[[${score.score}]]");
+                        /*[/]*/
+                        var educationScores = [];
+                        /*[# th:each="score : ${education.scores}"]*/
+                        educationScores.push("[[${score.score}]]");
+
                         /*[/]*/
 
-                        var ctx = document.getElementById('healthChart').getContext('2d');
+                        var ctx = document.getElementById('trendChart').getContext('2d');
                         var myChart = new Chart(ctx, {
                             type: 'line',
                             data: {
                                 labels: labels,
                                 datasets: [{
                                     label: 'Health Score',
-                                    data: scores,
+                                    data: healthScores,
                                     fill: false,
                                     borderColor: 'rgb(75, 192, 192)',
+                                    tension: 0.1
+                                },{
+                                    label: 'Education Score',
+                                    data: educationScores,
+                                    fill: false,
+                                    borderColor: 'rgb(192, 75, 192)',
                                     tension: 0.1
                                 }]
                             },
@@ -114,23 +128,127 @@
                             }
                         });
                     /*]]>*/
-
-
-
-
-
                     </script>
+                </div>
+            </div>
 
+            <!-- Safety Details -->
+            <div class="modal fade" id="safetyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="safetyModalTitle">Safety</h5>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card m-3">
-                <div class="card-body">
-                    <h3>EDUCATION</h3>
+
+            <!-- Health Details -->
+            <div class="modal fade" id="healthModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Health</h5>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-borderless table-sm">
+                                <tbody>
+                                <tr>
+                                    <th scope="row" class="col">Is the child's health satisfactory?</th>
+                                    <td th:text="${health.satisfactory} ? 'Yes' : 'No'"
+                                        th:class="${health.satisfactory} ? 'table-success' : 'table-danger'"></td>
+                                </tr>
+                                <tr th:if="${health.healthSituation != null}">
+                                    <th scope="row" class="col">What is the health issue?</th>
+                                    <td th:text="${health.healthSituation}"></td>
+                                </tr>
+                                <tr th:if="${health.healthRemediation != null}">
+                                    <th scope="row" class="col">What action has been taken to address the health
+                                        issue?
+                                    </th>
+                                    <td th:text="${health.healthRemediation}"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="col">Immunized</th>
+                                    <td th:unless="${health.immunized != null}" class="table-warning">Unknown</td>
+                                    <td th:if="${health.immunized != null}"
+                                        th:text="${health.immunized} ? 'Yes' : 'No'"
+                                        th:class="${health.immunized} ? 'table-success' : 'table-danger'"></td>
+                                </tr>
+                                <tr th:if="${health.immunized}">
+                                    <th scope="row" class="col">Immunization Date</th>
+                                    <td th:text="${health.immunizationDate != null ? health.immunizationDate : 'Unknown'}"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="col">Parent/Caretaker has participted in Nutrition
+                                        Assessment
+                                    </th>
+                                    <td th:unless="${health.nutritionAssessment != null}" class="table-warning">
+                                        Unknown
+                                    </td>
+                                    <td th:if="${health.nutritionAssessment != null}"
+                                        th:text="${health.nutritionAssessment} ? 'Yes' : 'No'"
+                                        th:class="${health.nutritionAssessment} ? 'table-success' : 'table-danger'"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card m-3">
-                <div class="card-body">
-                    <h3>PROGRAM INVOLVEMENT</h3>
+
+            <!-- Education Details -->
+            <div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Education</h5>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-borderless table-sm">
+                                <tbody>
+                                <tr>
+                                    <th scope="row" class="col">School Status</th>
+                                    <td th:text="${education.status.displayText}"
+                                        th:class="${education.status == T(org.childfund.models.Education.SchoolStatus).IN_SCHOOL} ? 'table-success' : 'table-warning'"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Participation Details -->
+            <div class="modal fade" id="participationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="safetyModalTitle">Safety</h5>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
