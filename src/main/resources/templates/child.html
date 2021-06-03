@@ -1,10 +1,86 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Child Detail</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 <body>
-<p th:text="'Hello, ' + ${name} + '!'" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <!-- Child Quick Info -->
+            <h2 th:text="${child.name} + ' - ' + ${child.id}"></h2>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row">Age</th>
+                        <td th:text="${child.age}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">DOB</th>
+                        <td th:text="${#temporals.format(child.dateOfBirth, 'dd-MM-yyyy')}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sex</th>
+                        <td th:text="${child.sex}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">LifeStage</th>
+                        <td th:text="${child.lifeStage}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Location</th>
+                        <td th:text="${child.village}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">School</th>
+                        <td th:text="${child.school}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Grade</th>
+                        <td th:text="${child.grade}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Cluster/Family Group</th>
+                        <td th:text="${child.family}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Last Update</th>
+                        <td th:text="${#temporals.format(child.updated, 'dd-MM-yyyy')}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+
+            <div class="card m-3">
+                <div class="card-body">
+                    <h3>SAFETY</h3>
+                </div>
+            </div>
+            <div class="card m-3">
+                <div class="card-body">
+                    <h3>HEALTH</h3>
+                </div>
+            </div>
+            <div class="card m-3">
+                <div class="card-body">
+                    <h3>EDUCATION</h3>
+                </div>
+            </div>
+            <div class="card m-3">
+                <div class="card-body">
+                    <h3>PROGRAM INVOLVEMENT</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>
