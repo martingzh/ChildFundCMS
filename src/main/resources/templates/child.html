@@ -3,6 +3,7 @@
 <head>
     <title>Child Detail</title>
     <th:block th:include="fragments/layout.html :: headerfiles"></th:block>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
 </head>
 <body>
 
@@ -64,6 +65,62 @@
             <div class="card m-3">
                 <div class="card-body">
                     <h3>HEALTH</h3>
+                    <table class="table table-borderless table-sm">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Is the child's health satisfactory?</th>
+                            <td th:text="${health.satisfactory} ? 'Yes' : 'No'"
+                                th:class="${health.satisfactory} ? 'table-success' : 'table-danger'"></td>
+                        </tr>
+                        <tr th:if="${health.healthSituation != null}">
+                            <th scope="row">What is the health issue?</th>
+                            <td th:text="${health.healthSituation}"></td>
+                        </tr>
+                        <tr th:if="${health.healthRemediation != null}">
+                            <th scope="row">What action has been taken to address the health issue?</th>
+                            <td th:text="${health.healthRemediation}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <canvas id="healthChart" width="400" height="100"></canvas>
+                    <script th:inline="javascript">
+                    /*<![CDATA[*/
+                        var labels = [];
+                        var scores = [];
+                        /*[# th:each="score : ${health.scores}"]*/
+                        labels.push([[${score.date}]]);
+                        scores.push("[[${score.score}]]");
+                        /*[/]*/
+
+                        var ctx = document.getElementById('healthChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'Health Score',
+                                    data: scores,
+                                    fill: false,
+                                    borderColor: 'rgb(75, 192, 192)',
+                                    tension: 0.1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    /*]]>*/
+
+
+
+
+
+                    </script>
+
                 </div>
             </div>
             <div class="card m-3">
