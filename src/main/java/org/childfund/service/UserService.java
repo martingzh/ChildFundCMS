@@ -1,5 +1,6 @@
 package org.childfund.service;
 
+<<<<<<< HEAD
 import org.childfund.models.Child;
 import org.childfund.models.Community;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +12,33 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+=======
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+>>>>>>> 84f4404... Integration with postgres - part2
 @Component
 public class UserService implements CrudRepository<Child, Community> {
 
-    @Autowired
-    private DataSource dataSource;
+  private ObjectMapper objectMapper = new ObjectMapper();
+  @Autowired private UserDao userDao;
 
-    public String create(final String payload) {
+  public void storeQuestionnaire(String payload) {
+    String id = getChildId(payload);
+    userDao.insertQuestionnaireBlob(id, payload);
+  }
 
-        Statement stmt = null;
-        try {
-            stmt = dataSource.getConnection().createStatement();
-            stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-            ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return "";
+  private String getChildId(String payload) {
+    String childId = "N/A";
+    JSONParser parser = new JSONParser(payload);
+    try {
+      childId = parser.object().get("group_childInfo/Child_number").toString();
+    } catch (Exception ex) {
+      ex.printStackTrace();
     }
+<<<<<<< HEAD
 
 
     @Override
@@ -56,4 +65,8 @@ public class UserService implements CrudRepository<Child, Community> {
     public void delete(String Id) {
 
     }
+=======
+    return childId;
+  }
+>>>>>>> 84f4404... Integration with postgres - part2
 }
