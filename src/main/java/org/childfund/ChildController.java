@@ -35,7 +35,7 @@ public class ChildController {
                 false,
                 "Child has Malaria",
                 "Malaria medication delivered",
-                false,
+                true,
                 null,
                 null,
                 List.of(
