@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 @Component
 public class UserService implements CrudRepository<Child, Community> {
@@ -30,23 +31,29 @@ public class UserService implements CrudRepository<Child, Community> {
         return "";
     }
 
+
     @Override
-    public String Create(Child child) {
+    public String create(Child child) {
         return null;
     }
 
     @Override
-    public Child Retrieve(String firstName) {
+    public Child get(String firstName) {
         return null;
     }
 
     @Override
-    public void Update(Child child) {
+    public List<Child> getAll() {
+        return null;
+    }
+
+    @Override
+    public void update(Child child, String[] params) {
 
     }
 
     @Override
-    public void Delete(String Id) {
+    public void delete(String Id) {
 
     }
 }

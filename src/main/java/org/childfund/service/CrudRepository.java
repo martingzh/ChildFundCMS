@@ -1,12 +1,16 @@
 package org.childfund.service;
 
+import java.util.List;
+
 public interface CrudRepository<Child, Community> {
 
-    String Create(Child child);
+    String create(Child child);
 
-    Child Retrieve(String firstName);
+    Child get(String firstName);
 
-    void Update(Child child);
+    List<Child> getAll();
 
-    void Delete(String Id);
+    void update(Child child, String[] params);
+
+    void delete(String Id);
 }
