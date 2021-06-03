@@ -22,9 +22,9 @@ mvn spring-boot:run
 
 ## Helpful Links
 
-[Spring Boot](https://spring.io/projects/spring-boot#overview) For web framework
-[Thymeleaf](https://www.thymeleaf.org/documentation.html) For HTML Templating
-[BootStrap](https://getbootstrap.com/docs/5.0) For client-side UI
+- [Spring Boot](https://spring.io/projects/spring-boot#overview) For web framework
+- [Thymeleaf](https://www.thymeleaf.org/documentation.html) For HTML Templating
+- [BootStrap](https://getbootstrap.com/docs/5.0) For client-side UI
 
 ## JSON format
 
