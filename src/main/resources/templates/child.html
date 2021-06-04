@@ -285,7 +285,38 @@
                             <h5 class="modal-title">Participation</h5>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <table class="table table-borderless table-sm">
+                                <tbody>
+                                <tr>
+                                    <th scope="row" class="col">Has child participated or benefited in any of the
+                                        following?
+                                    </th>
+                                    <td>
+                                        <ul>
+                                            <li th:each="benefit : ${participation.benefits}">
+                                                <span th:text="${benefit.displayText}"></span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr th:if="${participation.nonParticipationReason != null}">
+                                    <th scope="row" class="col">Reason for non-participation</th>
+                                    <td th:text="${participation.reason}"></td>
+                                </tr>
+                                <tr th:unless="${#lists.isEmpty(participation.participatedActivities)}">
+                                    <th scope="row" class="col">Specify which ChildFund sponsored activities the child
+                                        participated in or benefited from
+                                    </th>
+                                    <td>
+                                        <ul>
+                                            <li th:each="activity : ${participation.participatedActivities}">
+                                                <span th:text="${activity.displayText}"></span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
