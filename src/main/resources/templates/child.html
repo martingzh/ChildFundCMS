@@ -240,6 +240,14 @@
                                     <th scope="row" class="col">Reason for not being in school</th>
                                     <td th:text="${education.reason.displayText}"></td>
                                 </tr>
+                                <tr th:if="${education.status == T(org.childfund.models.Education.SchoolStatus).IN_SCHOOL}">
+                                    <th scope="row" class="col">School Type</th>
+                                    <td th:text="${education.type.displayText}"></td>
+                                </tr>
+                                <tr th:if="${education.status == T(org.childfund.models.Education.SchoolStatus).IN_SCHOOL}">
+                                    <th scope="row" class="col">Grade</th>
+                                    <td th:text="${education.grade.displayText}"></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
