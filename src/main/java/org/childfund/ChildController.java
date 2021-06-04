@@ -1,9 +1,5 @@
 package org.childfund;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 import org.childfund.models.Child;
 import org.childfund.models.Education;
 import org.childfund.models.Health;
@@ -12,6 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Controller
 public class ChildController {
@@ -26,7 +27,7 @@ public class ChildController {
             7,
             LocalDate.now(),
             "male",
-            "LS1",
+            Child.LifeStage.LS1,
             "VillageName",
             "Public",
             "2",
