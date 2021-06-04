@@ -93,7 +93,7 @@
                         var educationScores = [];
                         var participationScores = [];
                         /*[# th:each="score : ${scores}"]*/
-                        labels.push([[${score.date}]]);
+                        labels.push("[[${score.date}]]");
                         safetyScores.push("[[${score.safety}]]");
                         healthScores.push("[[${score.health}]]");
                         educationScores.push("[[${score.education}]]");
