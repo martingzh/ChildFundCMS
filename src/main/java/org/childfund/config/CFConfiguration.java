@@ -1,7 +1,6 @@
 package org.childfund.config;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class CFConfiguration {
 
   @Bean
-  public BasicDataSource dataSource() throws URISyntaxException {
+  public BasicDataSource dataSource() {
 
     BasicDataSource basicDataSource = new BasicDataSource();
 
