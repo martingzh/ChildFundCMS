@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import org.childfund.models.Child;
 import org.childfund.models.FormSubmission;
+import org.childfund.models.Safety;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -63,9 +64,11 @@ public class UserDao {
       preparedStatement.setString(1, childId);
       ResultSet ret = preparedStatement.executeQuery();
       while (ret.next()) {
-        Child child = convertToChildObj(ret.getString("questionnaire_jsonb"));
+        String json = ret.getString("questionnaire_jsonb");
+        Child child = convertToChildObj(json);
+        Safety safety = mapper.readValue(json, Safety.class);
 
-        submissions.add(new FormSubmission(child, null, null, null));
+        submissions.add(new FormSubmission(child, safety, null, null));
       }
     } catch (Exception throwables) {
       throwables.printStackTrace();
