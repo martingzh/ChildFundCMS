@@ -157,8 +157,8 @@
                                 <tbody>
                                 <tr>
                                     <th scope="row" class="col">Is the child in any life-threatening situation?</th>
-                                    <td th:text="${safety.lifeThreateningSituation} ? 'Yes' : 'No'"
-                                        th:class="${safety.lifeThreateningSituation} ? 'table-danger' : 'table-success'"></td>
+                                    <td th:text="${safety.lifeThreateningSituation}"
+                                        th:class="${safety.isLifeThreatened()} ? 'table-danger' : 'table-success'"></td>
                                 </tr>
                                 <tr th:if="${safety.situationDescription != null}">
                                     <th scope="row" class="col">What is the life-threatening situation?</th>

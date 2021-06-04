@@ -3,7 +3,10 @@ package org.childfund;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import org.childfund.models.*;
+import org.childfund.models.Education;
+import org.childfund.models.FormSubmission;
+import org.childfund.models.Health;
+import org.childfund.models.Score;
 import org.childfund.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +26,6 @@ public class ChildController {
     try {
       FormSubmission submission = userService.getLatestSubmission(childId);
 
-      Safety safety = new Safety(false, null, null);
       Health health =
           new Health(false, "Child has Malaria", "Malaria medication delivered", true, null, null);
       Education education =
@@ -42,7 +44,7 @@ public class ChildController {
               new Score(LocalDate.now(), 90, 75, 80, 50));
 
       model.addAttribute("child", submission.getChild());
-      model.addAttribute("safety", safety);
+      model.addAttribute("safety", submission.getSafety());
       model.addAttribute("health", health);
       model.addAttribute("education", education);
       model.addAttribute("scores", scores);
