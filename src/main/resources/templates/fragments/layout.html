@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link th:href="@{/css/partnersSearchBar.css}" rel="stylesheet">
+    <link th:href="@{/css/layout.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/js/partnersSearchBar.js}"></script>
 </head>
 <body>
@@ -25,10 +25,11 @@
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <form autocomplete="off" action="">
-                    <div class="autocomplete" style="width:300px;">
-                      <input id="localPartnersSearchBar" type="text" name="localPartnersSearchBar" placeholder="Search Partners">
+                    <div class="autocomplete">
+                      <input id="localPartnersSearchBar" type="text" name="localPartnersSearchBar" placeholder="Search Local Partners">
                     </div>
                 </form>
+                <button type="button" id="logout_button" class="btn btn-primary">Logout</button>
                 <script th:inline="javascript">
                     var partners = ["MBALE", "SOROTI", "BUSIA", "LANGO", "ACHOLI", "MASINDI", "KAMPALA", "JINJA", "KIBOGA"];
                     window.onload = autocomplete(document.getElementById("localPartnersSearchBar"), partners);

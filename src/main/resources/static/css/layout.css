@@ -6,6 +6,8 @@ body {
   /*the container must be positioned relative:*/
   position: relative;
   display: inline-block;
+  margin-right: -85px;
+  width: 300px;
 }
 input {
   border: 1px solid transparent;
@@ -15,8 +17,9 @@ input {
 }
 input[type=text] {
   border: 1px solid #d4d4d4;
-  background-color: #f1f1f1;
-  width: 80%;
+  background-color: #ffffff;
+  width: 62%;
+  margin-left: 10px;
 }
 
 .autocomplete-items {
@@ -45,4 +48,8 @@ input[type=text] {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+
+#logout_button{
+  margin-right: 5px;
 }
