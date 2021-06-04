@@ -1,6 +1,7 @@
 package org.childfund.service;
 
 import org.childfund.models.Child;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -10,7 +11,8 @@ import java.util.List;
 
 @Service
 public class SearchChildImpl implements SearchChild {
-    private static UserService userService;
+    @Autowired
+    private UserService userService;
 
     @Override
     public List<Child> findAllChildren() {
