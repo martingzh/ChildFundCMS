@@ -1,8 +1,9 @@
 package org.childfund.models;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Child {
 
   public enum LifeStage {
@@ -37,45 +38,41 @@ public class Child {
     }
   }
 
-  private final String id;
-  private final String firstName;
-  private final String otherName;
-  private final Integer age;
-  private final LocalDate dateOfBirth;
-  private final String sex;
-  private final LifeStage lifeStage;
-  private final String village;
-  private final String school;
-  private final String grade;
-  private final String family;
-  private final LocalDateTime updated;
+  @JsonProperty("group_childInfo/Child_number")
+  private String id;
 
-  public Child(
-      String id,
-      String firstName,
-      String otherName,
-      Integer age,
-      LocalDate dateOfBirth,
-      String sex,
-      LifeStage lifeStage,
-      String village,
-      String school,
-      String grade,
-      String family,
-      LocalDateTime updated) {
-    this.id = id;
-    this.firstName = firstName;
-    this.otherName = otherName;
-    this.age = age;
-    this.dateOfBirth = dateOfBirth;
-    this.sex = sex;
-    this.lifeStage = lifeStage;
-    this.village = village;
-    this.school = school;
-    this.grade = grade;
-    this.family = family;
-    this.updated = updated;
-  }
+  @JsonProperty("group_childInfo/Child_first_name")
+  private String firstName;
+
+  @JsonProperty("group_childInfo/Child_other_name")
+  private String otherName;
+
+  @JsonProperty("group_childInfo/Child_Age")
+  private Integer age;
+
+  @JsonProperty("group_childInfo/Child_date_of_birth")
+  private String dateOfBirth;
+
+  @JsonProperty("group_childInfo/Child_Sex")
+  private String sex;
+
+  @JsonProperty("group_childInfo/Child_Life_Stage")
+  private String lifeStageString;
+
+  @JsonProperty("group_general/Village")
+  private String village;
+
+  @JsonProperty("group_education/Child_In_School")
+  private String school;
+
+  @JsonProperty("group_education/School_Grade")
+  private String grade;
+
+  @JsonProperty("group_childInfo/Child_Cluster_Family_Group")
+  private String family;
+
+  @JsonProperty("_submission_time")
+  private String submissionTime;
 
   public String getId() {
     return id;
@@ -93,7 +90,7 @@ public class Child {
     return age;
   }
 
-  public LocalDate getDateOfBirth() {
+  public String getDateOfBirth() {
     return dateOfBirth;
   }
 
@@ -102,7 +99,7 @@ public class Child {
   }
 
   public LifeStage getLifeStage() {
-    return lifeStage;
+    return LifeStage.getFromJson(lifeStageString);
   }
 
   public String getVillage() {
@@ -121,8 +118,60 @@ public class Child {
     return family;
   }
 
-  public LocalDateTime getUpdated() {
-    return updated;
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public void setOtherName(String otherName) {
+    this.otherName = otherName;
+  }
+
+  public void setAge(Integer age) {
+    this.age = age;
+  }
+
+  public void setDateOfBirth(String dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
+
+  public String getLifeStageString() {
+    return lifeStageString;
+  }
+
+  public void setLifeStageString(String lifeStageString) {
+    this.lifeStageString = lifeStageString;
+  }
+
+  public String getSubmissionTime() {
+    return submissionTime;
+  }
+
+  public void setSubmissionTime(String submissionTime) {
+    this.submissionTime = submissionTime;
+  }
+
+  public void setVillage(String village) {
+    this.village = village;
+  }
+
+  public void setSchool(String school) {
+    this.school = school;
+  }
+
+  public void setGrade(String grade) {
+    this.grade = grade;
+  }
+
+  public void setFamily(String family) {
+    this.family = family;
   }
 
   public String getName() {

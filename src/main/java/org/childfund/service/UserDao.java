@@ -1,11 +1,15 @@
 package org.childfund.service;
 
-import com.google.gson.JsonArray;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import org.childfund.models.Child;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Component;
 public class UserDao {
 
   private static final String USER_QUESTIONNAIRE_TABLE = "user_questionnaire";
+  private ObjectMapper mapper = new ObjectMapper();
 
   private static final String sql =
       "INSERT into "
@@ -35,19 +40,23 @@ public class UserDao {
     }
   }
 
-  public String getQuestionnaireBlob(String childId) {
-    JsonArray jsonArray = new JsonArray();
+  public List<Child> getChildQuestionnaires(String childId) {
+    List<Child> children = new ArrayList<>();
     try {
       PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(get_sql);
       preparedStatement.setString(1, childId);
       ResultSet ret = preparedStatement.executeQuery();
       while (ret.next()) {
-        jsonArray.add(ret.getString("questionnaire_jsonb"));
+        children.add(convertToChildObj(ret.getString("questionnaire_jsonb")));
       }
-    } catch (SQLException throwables) {
+    } catch (Exception throwables) {
       throwables.printStackTrace();
     }
-    return jsonArray.toString();
+    return children;
+  }
+
+  private Child convertToChildObj(final String questionnaireJSONb) throws JsonProcessingException {
+    return mapper.readValue(questionnaireJSONb, Child.class);
   }
 
   @PostConstruct

@@ -23,7 +23,7 @@
                 </tr>
                 <tr>
                     <th scope="row">DOB</th>
-                    <td th:text="${#temporals.format(child.dateOfBirth, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${child.dateOfBirth}"></td>
                 </tr>
                 <tr>
                     <th scope="row">Sex</th>
@@ -51,7 +51,7 @@
                 </tr>
                 <tr>
                     <th scope="row">Last Update</th>
-                    <td th:text="${#temporals.format(child.updated, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${child.submissionTime}"></td>
                 </tr>
                 </tbody>
             </table>
