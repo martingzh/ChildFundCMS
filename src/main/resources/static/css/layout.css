@@ -5,9 +5,9 @@ body {
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
-  display: inline-block;
+  /*display: inline-block;
   margin-right: -85px;
-  width: 300px;
+  width: 300px;*/
 }
 input {
   border: 1px solid transparent;
@@ -18,8 +18,9 @@ input {
 input[type=text] {
   border: 1px solid #d4d4d4;
   background-color: #ffffff;
-  width: 62%;
+  width: 85%;
   margin-left: 10px;
+  margin-right: 20px;
 }
 
 .autocomplete-items {
@@ -32,7 +33,7 @@ input[type=text] {
   top: 100%;
   left: 9px;
   right: 0;
-  width:62%;
+  width: 85%;
 }
 .autocomplete-items div {
   padding: 10px;
