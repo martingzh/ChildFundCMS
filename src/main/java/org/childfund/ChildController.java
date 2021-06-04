@@ -63,9 +63,10 @@ public class ChildController {
       path = "/questionnaires/{id}",
       consumes = "application/json",
       produces = "application/json")
-  public ResponseEntity<String> getAllQuestionnaires(@PathVariable(value = "id") String childId) {
+  public ResponseEntity<String> getAllChildQuestionnairesById(
+      @PathVariable(value = "id") String childId) {
     try {
-      String json = userService.getAllChildQuestionnaires(childId);
+      String json = userService.getAllChildQuestionnairesById(childId);
       return ResponseEntity.ok(json);
     } catch (Exception ex) {
       ex.printStackTrace();
