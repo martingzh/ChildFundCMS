@@ -1,26 +1,33 @@
 package org.childfund;
 
+import org.childfund.config.CFConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
+import org.springframework.context.annotation.Import;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
-
 @SpringBootApplication
+@Import(CFConfiguration.class)
 public class Application {
 
-    @RequestMapping("/")
-    @ResponseBody
-    String home() {
-        return "Hello World ChildFundCMS!";
+  @RequestMapping("/")
+  @ResponseBody
+  String home() {
+    return "Hello World ChildFundCMS!";
+  }
 
-    }
+  @GetMapping("/login")
+  public String login(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+    model.addAttribute("name", name);
+    return "login";
 
+  }
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 }

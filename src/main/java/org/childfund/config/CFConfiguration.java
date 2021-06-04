@@ -1,25 +1,43 @@
 package org.childfund.config;
 
+import java.net.URI;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import java.net.URISyntaxException;
-
 @Configuration
+@ComponentScan(basePackages = {"org.childfund"})
 public class CFConfiguration {
 
-    @Bean
-    public BasicDataSource dataSource() throws URISyntaxException {
-        String dbUrl = System.getenv("JDBC_DATABASE_URL");
-        String username = System.getenv("JDBC_DATABASE_USERNAME");
-        String password = System.getenv("JDBC_DATABASE_PASSWORD");
+  @Bean
+  public BasicDataSource dataSource() {
 
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(dbUrl);
-        basicDataSource.setUsername(username);
-        basicDataSource.setPassword(password);
+    BasicDataSource basicDataSource = new BasicDataSource();
 
-        return basicDataSource;
+    try {
+
+      URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+      String username = dbUri.getUserInfo().split(":")[0];
+      String password = dbUri.getUserInfo().split(":")[1];
+
+      String dbUrl =
+          "jdbc:postgresql://"
+              + dbUri.getHost()
+              + ':'
+              + dbUri.getPort()
+              + dbUri.getPath()
+              + "?sslmode=require";
+
+      basicDataSource.setUrl(dbUrl);
+      basicDataSource.setUsername(username);
+      basicDataSource.setPassword(password);
+
+    } catch (Exception ex) {
+      ex.printStackTrace();
     }
+
+    return basicDataSource;
+  }
 }
