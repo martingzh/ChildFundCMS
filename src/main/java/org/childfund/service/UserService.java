@@ -7,6 +7,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.tomcat.util.json.JSONParser;
 import org.childfund.models.Child;
 import org.childfund.models.Community;
+import org.childfund.models.FormSubmission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,12 @@ public class UserService implements CrudRepository<Child, Community> {
     return child;
   }
 
+  public FormSubmission getLatestSubmission(String childId) {
+    List<FormSubmission> submissions = userDao.getFormSubmissions(childId);
+    submissions.sort(this::sortBySubmissionDate);
+    return submissions.get(0);
+  }
+
   private Child getLatestSubmission(List<Child> childInfos) {
     childInfos.sort(this::sortBySubmissionDate);
     return childInfos.get(0);
@@ -46,6 +53,17 @@ public class UserService implements CrudRepository<Child, Community> {
   }
 
   private int sortBySubmissionDate(Child child1, Child child2) {
+    try {
+      long lDate1 = DateUtils.parseDate(child1.getSubmissionTime(), DATE_FORMATTER).getTime();
+      long lDate2 = DateUtils.parseDate(child2.getSubmissionTime(), DATE_FORMATTER).getTime();
+      return lDate2 > lDate1 ? 1 : -1;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return 0;
+  }
+
+  private int sortBySubmissionDate(FormSubmission child1, FormSubmission child2) {
     try {
       long lDate1 = DateUtils.parseDate(child1.getSubmissionTime(), DATE_FORMATTER).getTime();
       long lDate2 = DateUtils.parseDate(child2.getSubmissionTime(), DATE_FORMATTER).getTime();

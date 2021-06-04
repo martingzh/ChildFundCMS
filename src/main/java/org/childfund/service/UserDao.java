@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import org.childfund.models.Child;
+import org.childfund.models.FormSubmission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -53,6 +54,23 @@ public class UserDao {
       throwables.printStackTrace();
     }
     return children;
+  }
+
+  public List<FormSubmission> getFormSubmissions(String childId) {
+    List<FormSubmission> submissions = new ArrayList<>();
+    try {
+      PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(get_sql);
+      preparedStatement.setString(1, childId);
+      ResultSet ret = preparedStatement.executeQuery();
+      while (ret.next()) {
+        Child child = convertToChildObj(ret.getString("questionnaire_jsonb"));
+
+        submissions.add(new FormSubmission(child, null, null, null));
+      }
+    } catch (Exception throwables) {
+      throwables.printStackTrace();
+    }
+    return submissions;
   }
 
   private Child convertToChildObj(final String questionnaireJSONb) throws JsonProcessingException {

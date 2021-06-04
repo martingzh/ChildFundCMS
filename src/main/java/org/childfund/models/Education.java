@@ -1,5 +1,7 @@
 package org.childfund.models;
 
+import org.springframework.lang.Nullable;
+
 public class Education {
 
   public enum SchoolStatus {
@@ -46,12 +48,63 @@ public class Education {
     }
   }
 
+  public enum SchoolType {
+    PRIVATE("Private"),
+    PUBLIC("Public"),
+    OTHER("Other");
+
+    private final String displayText;
+
+    private SchoolType(String displayText) {
+      this.displayText = displayText;
+    }
+
+    public String getDisplayText() {
+      return displayText;
+    }
+  }
+
+  public enum Grade {
+    PRE_KINDERGARTEN("Pre-Kindergarten"),
+    KINDERGARTEN("Kindergarten"),
+    FIRST("1st Grade"),
+    SECOND("2nd Grade"),
+    THIRD("3rd Grade"),
+    FOURTH("4th Grade"),
+    FIFTH("5th Grade"),
+    SIXTH("6th Grade"),
+    SEVENTH("7th Grade"),
+    SECONDARY("8th Grade"),
+    VOCATIONAL("Vocational School"),
+    COLLEGE("Community College/University"),
+    NOT_SURE("Not Sure/Don't Know"),
+    NOT_ANSWERED("Chose not to answer");
+
+    private final String displayText;
+
+    private Grade(String displayText) {
+      this.displayText = displayText;
+    }
+
+    public String getDisplayText() {
+      return displayText;
+    }
+  }
+
   private final SchoolStatus status;
   private final NonAttendanceReason reason;
+  @Nullable private final SchoolType type;
+  @Nullable private final Grade grade;
 
-  public Education(SchoolStatus status, NonAttendanceReason reason) {
+  public Education(
+      SchoolStatus status,
+      NonAttendanceReason reason,
+      @Nullable SchoolType type,
+      @Nullable Grade grade) {
     this.status = (status == null) ? SchoolStatus.NOT_ANSWERED : status;
     this.reason = (reason == null) ? NonAttendanceReason.NOT_ANSWERED : reason;
+    this.type = type;
+    this.grade = grade;
   }
 
   public SchoolStatus getStatus() {
@@ -60,5 +113,15 @@ public class Education {
 
   public NonAttendanceReason getReason() {
     return reason;
+  }
+
+  @Nullable
+  public SchoolType getType() {
+    return type;
+  }
+
+  @Nullable
+  public Grade getGrade() {
+    return grade;
   }
 }
