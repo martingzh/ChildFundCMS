@@ -2,9 +2,24 @@ package org.childfund.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Child {
+
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class Attachment {
+    @JsonProperty("download_url")
+    private String url;
+
+    public void setUrl(String url) {
+      this.url = url;
+    }
+
+    public String getUrl() {
+      return url;
+    }
+  }
 
   public enum LifeStage {
     LS1("LS1 (Age 0-5)", "lifeStage1"),
@@ -70,6 +85,9 @@ public class Child {
 
   @JsonProperty("group_childInfo/Child_Cluster_Family_Group")
   private String family;
+
+  @JsonProperty("_attachments")
+  private List<Attachment> attachments;
 
   @JsonProperty("_submission_time")
   private String submissionTime;
@@ -172,6 +190,17 @@ public class Child {
 
   public void setFamily(String family) {
     this.family = family;
+  }
+
+  public List<Attachment> getAttachments() {
+    return attachments;
+  }
+
+  public String getPhotoUrl() {
+    if (attachments != null && !attachments.isEmpty()) {
+      return attachments.get(0).url;
+    }
+    return null;
   }
 
   public String getName() {
