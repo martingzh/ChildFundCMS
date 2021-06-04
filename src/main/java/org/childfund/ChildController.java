@@ -36,6 +36,7 @@ public class ChildController {
       model.addAttribute("safety", submission.getSafety());
       model.addAttribute("health", submission.getHealth());
       model.addAttribute("education", submission.getEducation());
+      model.addAttribute("participation", submission.getParticipation());
       model.addAttribute("scores", scores);
 
     } catch (Exception ex) {
