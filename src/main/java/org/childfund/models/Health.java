@@ -1,7 +1,6 @@
 package org.childfund.models;
 
 import java.time.LocalDate;
-import java.util.List;
 import org.springframework.lang.Nullable;
 
 public class Health {
@@ -12,7 +11,6 @@ public class Health {
   @Nullable final Boolean immunized;
   @Nullable private final LocalDate immunizationDate;
   @Nullable private final Boolean nutritionAssessment;
-  private final List<Score> scores;
 
   public Health(
       boolean satisfactory,
@@ -20,15 +18,13 @@ public class Health {
       @Nullable String healthRemediation,
       @Nullable Boolean immunized,
       @Nullable LocalDate immunizationDate,
-      @Nullable Boolean nutritionAssessment,
-      List<Score> scores) {
+      @Nullable Boolean nutritionAssessment) {
     this.satisfactory = satisfactory;
     this.healthSituation = healthSituation;
     this.healthRemediation = healthRemediation;
     this.immunized = immunized;
     this.immunizationDate = immunizationDate;
     this.nutritionAssessment = nutritionAssessment;
-    this.scores = scores;
   }
 
   public boolean getSatisfactory() {
@@ -58,27 +54,5 @@ public class Health {
   @Nullable
   public Boolean getNutritionAssessment() {
     return nutritionAssessment;
-  }
-
-  public List<Score> getScores() {
-    return scores;
-  }
-
-  public static class Score {
-    private final LocalDate date;
-    private final int score;
-
-    public Score(LocalDate date, int score) {
-      this.date = date;
-      this.score = score;
-    }
-
-    public LocalDate getDate() {
-      return date;
-    }
-
-    public int getScore() {
-      return score;
-    }
   }
 }
