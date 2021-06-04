@@ -64,16 +64,16 @@
                     <div class="container">
                         <div class="row">
                             <div class="col" data-bs-toggle="modal" data-bs-target="#safetyModal">
-                                Safety: 40%
+                                Safety: <span th:text="${scores[scores.size()-1].safety} + '%'"></span>
                             </div>
                             <div class="col" data-bs-toggle="modal" data-bs-target="#healthModal">
-                                Health: 50%
+                                Health: <span th:text="${scores[scores.size()-1].health} + '%'"></span>
                             </div>
                             <div class="col" data-bs-toggle="modal" data-bs-target="#educationModal">
-                                Education: 60%
+                                Education: <span th:text="${scores[scores.size()-1].education} + '%'"></span>
                             </div>
                             <div class="col" data-bs-toggle="modal" data-bs-target="#participationModal">
-                                Participation: 90%
+                                Participation: <span th:text="${scores[scores.size()-1].participation} + '%'"></span>
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,25 @@
                             <h5 class="modal-title" id="safetyModalTitle">Safety</h5>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <table class="table table-borderless table-sm">
+                                <tbody>
+                                <tr>
+                                    <th scope="row" class="col">Is the child in any life-threatening situation?</th>
+                                    <td th:text="${safety.lifeThreateningSituation} ? 'Yes' : 'No'"
+                                        th:class="${safety.lifeThreateningSituation} ? 'table-danger' : 'table-success'"></td>
+                                </tr>
+                                <tr th:if="${safety.situationDescription != null}">
+                                    <th scope="row" class="col">What is the life-threatening situation?</th>
+                                    <td th:text="${safety.situationDescription}"></td>
+                                </tr>
+                                <tr th:if="${safety.actionTaken != null}">
+                                    <th scope="row" class="col">What action has been been taken to address the
+                                        life-threatening situation?
+                                    </th>
+                                    <td th:text="${safety.actionTaken}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -264,7 +282,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="safetyModalTitle">Safety</h5>
+                            <h5 class="modal-title">Participation</h5>
                         </div>
                         <div class="modal-body">
                             ...

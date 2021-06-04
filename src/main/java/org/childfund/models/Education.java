@@ -93,12 +93,14 @@ public class Education {
 
   private final SchoolStatus status;
   private final NonAttendanceReason reason;
-  @Nullable
-  private final SchoolType type;
-  @Nullable
-  private final Grade grade;
+  @Nullable private final SchoolType type;
+  @Nullable private final Grade grade;
 
-  public Education(SchoolStatus status, NonAttendanceReason reason, @Nullable SchoolType type, @Nullable Grade grade) {
+  public Education(
+      SchoolStatus status,
+      NonAttendanceReason reason,
+      @Nullable SchoolType type,
+      @Nullable Grade grade) {
     this.status = (status == null) ? SchoolStatus.NOT_ANSWERED : status;
     this.reason = (reason == null) ? NonAttendanceReason.NOT_ANSWERED : reason;
     this.type = type;
