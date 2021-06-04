@@ -16,8 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Import(CFConfiguration.class)
 public class Application implements WebMvcConfigurer {
   public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController("/home").setViewName("index");
-    registry.addViewController("/").setViewName("login");
+    registry.addViewController("/home").setViewName("home");
+    registry.addViewController("/").setViewName("home");
     registry.addViewController("/login").setViewName("login");
   }
 
