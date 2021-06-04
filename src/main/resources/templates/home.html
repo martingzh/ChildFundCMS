@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head> 
+        <title>Sponsorship Case Management System</title> 
+        <th:block th:include="fragments/layout.html :: headerfiles"></th:block>
+    </head>
 
-Child Page Info:
-<header th:insert="fragments/layout.html :: header"> </header>
+    <body>
+        <header th:insert="fragments/layout.html :: header"> </header>
+        <div class="container">
 
-</body>
+        </div>
+        <div th:replace="fragments/layout.html :: footer"></div>
+    </body>
 </html>
