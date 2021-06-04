@@ -24,7 +24,7 @@ public class UserService {
   }
 
   public Child getChildById(String childId) {
-    List<Child> childInfo = userDao.getChildAllQuestionnaires(childId);
+    List<Child> childInfo = userDao.getChildAllQuestionnairesById(childId);
     if (CollectionUtils.isEmpty(childInfo)) {
       return new Child();
     }
@@ -65,7 +65,7 @@ public class UserService {
 
   public String getAllChildQuestionnaires(String childId) {
 
-    List<Child> childInfo = userDao.getChildAllQuestionnaires(childId);
+    List<Child> childInfo = userDao.getChildAllQuestionnairesById(childId);
     try {
       return mapper.writeValueAsString(childInfo);
     } catch (JsonProcessingException e) {
