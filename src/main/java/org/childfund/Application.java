@@ -9,24 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @Import(CFConfiguration.class)
-public class Application {
-
-  @RequestMapping("/")
-  @ResponseBody
-  String home() {
-    return "Hello World ChildFundCMS!";
+public class Application implements WebMvcConfigurer {
+  public void addViewControllers(ViewControllerRegistry registry) {
+    registry.addViewController("/home").setViewName("home");
+    registry.addViewController("/").setViewName("/");
+    registry.addViewController("/login").setViewName("login");
   }
 
-  @GetMapping("/login")
-  public String login(
-      @RequestParam(name = "name", required = false, defaultValue = "World") String name,
-      Model model) {
-    model.addAttribute("name", name);
-    return "login";
-  }
 
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
