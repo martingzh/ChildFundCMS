@@ -11,7 +11,10 @@ NOTE: to get this working
 java -version  --> should be [java version "10.0.2" 2018-07-17] or greater
 2.  follow this article to create a system.properties and add java.runtime.version=11
 https://devcenter.heroku.com/articles/java-support
-3.  Adjust the the JDBC url you use to run locally, replace the system env with postgres://twvcxtnjmotzym:d62b0f301908da0f8f4797643a35403b63d9d42d6820a8aaec7c7c57ba9f3cc2@ec2-54-211-176-156.compute-1.amazonaws.com:5432/d63otge472kq68
+3.  Adjust the the JDBC url you use to run locally, replace the system env by running 
+ ```
+ export DATABASE_URL=postgres://twvcxtnjmotzym:d62b0f301908da0f8f4797643a35403b63d9d42d6820a8aaec7c7c57ba9f3cc2@ec2-54-211-176-156.compute-1.amazonaws.com:5432/d63otge472kq68 
+  ```
 
 then follow steps in the tutorial to build and run. 
 
