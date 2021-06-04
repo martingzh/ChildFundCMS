@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import org.childfund.models.Child;
+import org.childfund.models.Education;
 import org.childfund.models.FormSubmission;
 import org.childfund.models.Safety;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,10 +66,11 @@ public class UserDao {
       ResultSet ret = preparedStatement.executeQuery();
       while (ret.next()) {
         String json = ret.getString("questionnaire_jsonb");
-        Child child = convertToChildObj(json);
+        Child child = mapper.readValue(json, Child.class);
         Safety safety = mapper.readValue(json, Safety.class);
+        Education education = mapper.readValue(json, Education.class);
 
-        submissions.add(new FormSubmission(child, safety, null, null));
+        submissions.add(new FormSubmission(child, safety, null, education));
       }
     } catch (Exception throwables) {
       throwables.printStackTrace();

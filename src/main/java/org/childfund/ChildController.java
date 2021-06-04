@@ -3,7 +3,6 @@ package org.childfund;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import org.childfund.models.Education;
 import org.childfund.models.FormSubmission;
 import org.childfund.models.Health;
 import org.childfund.models.Score;
@@ -28,12 +27,6 @@ public class ChildController {
 
       Health health =
           new Health(false, "Child has Malaria", "Malaria medication delivered", true, null, null);
-      Education education =
-          new Education(
-              Education.SchoolStatus.IN_SCHOOL,
-              null,
-              Education.SchoolType.PUBLIC,
-              Education.Grade.SECOND);
 
       List<Score> scores =
           List.of(
@@ -46,7 +39,7 @@ public class ChildController {
       model.addAttribute("child", submission.getChild());
       model.addAttribute("safety", submission.getSafety());
       model.addAttribute("health", health);
-      model.addAttribute("education", education);
+      model.addAttribute("education", submission.getEducation());
       model.addAttribute("scores", scores);
 
     } catch (Exception ex) {
