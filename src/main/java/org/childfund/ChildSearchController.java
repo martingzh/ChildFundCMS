@@ -11,28 +11,23 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping(path = "/childfund/child")
 public class ChildSearchController {
 
   @Autowired private SearchChild searchChild;
 
-  @GetMapping("/search1")
-  public String getChildById(@RequestParam("Id") String Id, Model model) {
-    Child child = searchChild.findChildById(Id);
+  @GetMapping(path = "/search1/{id}")
+  public String getChildById(@PathVariable(value = "id") String id, Model model) {
+    Child child = searchChild.findChildById(id);
     model.addAttribute(child);
     return "";
   }
 
-  @GetMapping("/search2")
-  public String getChildByName(
-      @RequestParam(value = "firstName", required = false) String firstName,
-      @RequestParam(value = "otherName", required = false) String otherName,
-      Model model) {
+  @GetMapping(path = "/search2/{searchBy}")
+  public String getChildByName(@PathVariable(value = "searchBy") String searchBy, Model model) {
     List<Child> children = new ArrayList<>();
-    if (!StringUtils.isEmpty(firstName)) {
-      children = searchChild.findAllChildrenByName(firstName);
-    }
-    if (!StringUtils.isEmpty(otherName)) {
-      children = searchChild.findAllChildrenByOtherName(otherName);
+    if (!StringUtils.isEmpty(searchBy)) {
+      children = searchChild.findAllChildrenByName(searchBy);
     }
     model.addAttribute(children);
     return "";

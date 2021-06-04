@@ -59,8 +59,8 @@ public class UserService {
     return 0;
   }
 
-  public List<Child> getAllChildrenData() {
-    return userDao.getAllChildrenData();
+  public List<Child> getChildrenDataByFirstNameOrOtherName(String searchBy) {
+    return userDao.getChildrenDataByFirstNameOrOtherName(searchBy);
   }
 
   public String getAllChildQuestionnaires(String childId) {
