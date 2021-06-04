@@ -1,6 +1,5 @@
 package org.childfund.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import org.apache.tomcat.util.json.JSONParser;
 import org.childfund.models.Child;
@@ -11,12 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserService implements CrudRepository<Child, Community> {
 
-  private ObjectMapper objectMapper = new ObjectMapper();
   @Autowired private UserDao userDao;
 
   public void storeQuestionnaire(String payload) {
     String id = getChildId(payload);
     userDao.insertQuestionnaireBlob(id, payload);
+  }
+
+  public String getQuestionnaire(String childId) {
+    return userDao.getQuestionnaireBlob(childId);
   }
 
   private String getChildId(String payload) {
