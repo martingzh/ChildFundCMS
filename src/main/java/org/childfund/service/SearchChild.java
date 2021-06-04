@@ -7,11 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface SearchChild {
 
-  List<Child> findAllChildren();
-
-  List<Child> findAllChildrenByName(String firstName);
-
-  List<Child> findAllChildrenByOtherName(String otherName);
+  List<Child> findAllChildrenByName(String searchBy);
 
   Child findChildById(String Id);
 }
