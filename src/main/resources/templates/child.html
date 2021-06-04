@@ -236,6 +236,10 @@
                                     <td th:text="${education.status.displayText}"
                                         th:class="${education.status == T(org.childfund.models.Education.SchoolStatus).IN_SCHOOL} ? 'table-success' : 'table-warning'"></td>
                                 </tr>
+                                <tr th:if="${education.status == T(org.childfund.models.Education.SchoolStatus).NOT_IN_SCHOOL}">
+                                    <th scope="row" class="col">Reason for not being in school</th>
+                                    <td th:text="${education.reason.displayText}"></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
