@@ -28,7 +28,7 @@ public class ChildController {
   @GetMapping(path = "/{id}")
   public String getChildInfo(@PathVariable(value = "id") String childId, Model model) {
     try {
-      Child child = userService.getChildQuestionnaire(childId);
+      Child child = userService.getChildById(childId);
 
       Health health =
           new Health(false, "Child has Malaria", "Malaria medication delivered", true, null, null);

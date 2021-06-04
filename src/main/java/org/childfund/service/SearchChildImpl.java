@@ -13,13 +13,13 @@ public class SearchChildImpl implements SearchChild {
 
   @Override
   public List<Child> findAllChildren() {
-    List<Child> allChildren = userService.getAll();
+    List<Child> allChildren = userService.getAllChildrenData();
     return !CollectionUtils.isEmpty(allChildren) ? allChildren : Collections.emptyList();
   }
 
   @Override
   public List<Child> findAllChildrenByName(String firstName) {
-    List<Child> allChildren = userService.getAll();
+    List<Child> allChildren = userService.getAllChildrenData();
     List<Child> children = new ArrayList<>();
     for (Child child : allChildren) {
       if (child.getFirstName().contains(firstName)) {
@@ -31,7 +31,7 @@ public class SearchChildImpl implements SearchChild {
 
   @Override
   public List<Child> findAllChildrenByOtherName(String otherName) {
-    List<Child> allChildren = userService.getAll();
+    List<Child> allChildren = userService.getAllChildrenData();
     List<Child> children = new ArrayList<>();
     for (Child child : allChildren) {
       if (child.getOtherName().contains(otherName)) {
@@ -43,7 +43,11 @@ public class SearchChildImpl implements SearchChild {
 
   @Override
   public Child findChildById(String Id) {
-    return userService.get(Id);
+    try {
+      return userService.getChildById(Id);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return new Child();
   }
-  // TODO: Error handling
 }

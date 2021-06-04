@@ -24,8 +24,11 @@ public class UserDao {
           + USER_QUESTIONNAIRE_TABLE
           + "(child_id,questionnaire_jsonb) VALUES (?,?::json)";
 
-  private static final String get_sql =
+  private static final String get_questionnaire_by_id_sql =
       "Select questionnaire_jsonb from " + USER_QUESTIONNAIRE_TABLE + " where child_id=?";
+
+  private static final String get_all_questionnaire_sql =
+      "Select questionnaire_jsonb from " + USER_QUESTIONNAIRE_TABLE;
 
   @Autowired private DataSource dataSource;
 
@@ -40,11 +43,27 @@ public class UserDao {
     }
   }
 
-  public List<Child> getChildQuestionnaires(String childId) {
+  public List<Child> getChildAllQuestionnaires(String childId) {
     List<Child> children = new ArrayList<>();
     try {
-      PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(get_sql);
+      PreparedStatement preparedStatement =
+          dataSource.getConnection().prepareStatement(get_questionnaire_by_id_sql);
       preparedStatement.setString(1, childId);
+      ResultSet ret = preparedStatement.executeQuery();
+      while (ret.next()) {
+        children.add(convertToChildObj(ret.getString("questionnaire_jsonb")));
+      }
+    } catch (Exception throwables) {
+      throwables.printStackTrace();
+    }
+    return children;
+  }
+
+  public List<Child> getAllChildrenData() {
+    List<Child> children = new ArrayList<>();
+    try {
+      PreparedStatement preparedStatement =
+          dataSource.getConnection().prepareStatement(get_all_questionnaire_sql);
       ResultSet ret = preparedStatement.executeQuery();
       while (ret.next()) {
         children.add(convertToChildObj(ret.getString("questionnaire_jsonb")));
