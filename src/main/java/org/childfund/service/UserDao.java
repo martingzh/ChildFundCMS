@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import org.childfund.models.Child;
-import org.childfund.models.Education;
-import org.childfund.models.FormSubmission;
-import org.childfund.models.Safety;
+import org.childfund.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -68,9 +65,10 @@ public class UserDao {
         String json = ret.getString("questionnaire_jsonb");
         Child child = mapper.readValue(json, Child.class);
         Safety safety = mapper.readValue(json, Safety.class);
+        Health health = mapper.readValue(json, Health.class);
         Education education = mapper.readValue(json, Education.class);
 
-        submissions.add(new FormSubmission(child, safety, null, education));
+        submissions.add(new FormSubmission(child, safety, health, education));
       }
     } catch (Exception throwables) {
       throwables.printStackTrace();

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import org.childfund.models.FormSubmission;
-import org.childfund.models.Health;
 import org.childfund.models.Score;
 import org.childfund.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,6 @@ public class ChildController {
     try {
       FormSubmission submission = userService.getLatestSubmission(childId);
 
-      Health health =
-          new Health(false, "Child has Malaria", "Malaria medication delivered", true, null, null);
-
       List<Score> scores =
           List.of(
               new Score(LocalDate.now().minus(6, ChronoUnit.MONTHS), 50, 60, 70, 20),
@@ -38,7 +34,7 @@ public class ChildController {
 
       model.addAttribute("child", submission.getChild());
       model.addAttribute("safety", submission.getSafety());
-      model.addAttribute("health", health);
+      model.addAttribute("health", submission.getHealth());
       model.addAttribute("education", submission.getEducation());
       model.addAttribute("scores", scores);
 

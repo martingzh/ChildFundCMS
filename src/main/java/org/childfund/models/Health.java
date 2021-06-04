@@ -1,34 +1,37 @@
 package org.childfund.models;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.lang.Nullable;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Health {
 
-  private final boolean satisfactory;
-  @Nullable private final String healthSituation;
-  @Nullable private final String healthRemediation;
-  @Nullable final Boolean immunized;
-  @Nullable private final LocalDate immunizationDate;
-  @Nullable private final Boolean nutritionAssessment;
+  @JsonProperty("group_health/Healthy")
+  private String satisfactory;
 
-  public Health(
-      boolean satisfactory,
-      @Nullable String healthSituation,
-      @Nullable String healthRemediation,
-      @Nullable Boolean immunized,
-      @Nullable LocalDate immunizationDate,
-      @Nullable Boolean nutritionAssessment) {
-    this.satisfactory = satisfactory;
-    this.healthSituation = healthSituation;
-    this.healthRemediation = healthRemediation;
-    this.immunized = immunized;
-    this.immunizationDate = immunizationDate;
-    this.nutritionAssessment = nutritionAssessment;
-  }
+  @Nullable
+  @JsonProperty("group_health/Health_Issue")
+  private String healthSituation;
+
+  @Nullable
+  @JsonProperty("group_health/Health_Issue_Remediation")
+  private String healthRemediation;
+
+  @Nullable
+  @JsonProperty("group_interview/immunized")
+  private String immunized;
+
+  @Nullable
+  @JsonProperty("group_interview/Date_of_immunization")
+  private String immunizationDate;
+
+  @Nullable
+  @JsonProperty("group_interview/Nutrition_Counselling")
+  private String nutritionAssessment;
 
   public boolean getSatisfactory() {
-    return satisfactory;
+    return satisfactory.equalsIgnoreCase("yes");
   }
 
   @Nullable
@@ -42,17 +45,17 @@ public class Health {
   }
 
   @Nullable
-  public Boolean getImmunized() {
-    return immunized;
+  public boolean getImmunized() {
+    return immunized != null && immunized.equalsIgnoreCase("yes");
   }
 
   @Nullable
-  public LocalDate getImmunizationDate() {
+  public String getImmunizationDate() {
     return immunizationDate;
   }
 
   @Nullable
-  public Boolean getNutritionAssessment() {
-    return nutritionAssessment;
+  public boolean getNutritionAssessment() {
+    return nutritionAssessment != null && nutritionAssessment.equalsIgnoreCase("yes");
   }
 }
