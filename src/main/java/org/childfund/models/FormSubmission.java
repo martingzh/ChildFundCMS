@@ -5,12 +5,15 @@ public class FormSubmission {
   private final Safety safety;
   private final Health health;
   private final Education education;
+  private final Participation participation;
 
-  public FormSubmission(Child child, Safety safety, Health health, Education education) {
+  public FormSubmission(
+      Child child, Safety safety, Health health, Education education, Participation participation) {
     this.child = child;
     this.safety = safety;
     this.health = health;
     this.education = education;
+    this.participation = participation;
   }
 
   public Child getChild() {
@@ -27,6 +30,10 @@ public class FormSubmission {
 
   public Education getEducation() {
     return education;
+  }
+
+  public Participation getParticipation() {
+    return participation;
   }
 
   public String getSubmissionTime() {

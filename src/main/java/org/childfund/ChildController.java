@@ -3,9 +3,7 @@ package org.childfund;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import org.childfund.models.Education;
 import org.childfund.models.FormSubmission;
-import org.childfund.models.Health;
 import org.childfund.models.Score;
 import org.childfund.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +24,6 @@ public class ChildController {
     try {
       FormSubmission submission = userService.getLatestSubmission(childId);
 
-      Health health =
-          new Health(false, "Child has Malaria", "Malaria medication delivered", true, null, null);
-      Education education =
-          new Education(
-              Education.SchoolStatus.IN_SCHOOL,
-              null,
-              Education.SchoolType.PUBLIC,
-              Education.Grade.SECOND);
-
       List<Score> scores =
           List.of(
               new Score(LocalDate.now().minus(6, ChronoUnit.MONTHS), 50, 60, 70, 20),
@@ -45,8 +34,9 @@ public class ChildController {
 
       model.addAttribute("child", submission.getChild());
       model.addAttribute("safety", submission.getSafety());
-      model.addAttribute("health", health);
-      model.addAttribute("education", education);
+      model.addAttribute("health", submission.getHealth());
+      model.addAttribute("education", submission.getEducation());
+      model.addAttribute("participation", submission.getParticipation());
       model.addAttribute("scores", scores);
 
     } catch (Exception ex) {
@@ -73,9 +63,10 @@ public class ChildController {
       path = "/questionnaires/{id}",
       consumes = "application/json",
       produces = "application/json")
-  public ResponseEntity<String> getAllQuestionnaires(@PathVariable(value = "id") String childId) {
+  public ResponseEntity<String> getAllChildQuestionnairesById(
+      @PathVariable(value = "id") String childId) {
     try {
-      String json = userService.getAllChildQuestionnaires(childId);
+      String json = userService.getAllChildQuestionnairesById(childId);
       return ResponseEntity.ok(json);
     } catch (Exception ex) {
       ex.printStackTrace();

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         * {box-sizing: border-box;}
@@ -107,6 +108,10 @@
         .dropdown a:hover {background-color: #ddd;}
 
     </style>
+=======
+    <link th:href="@{/css/layout.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/partnersSearchBar.js}"></script>
+>>>>>>> master
 </head>
 <body>
 <div th:fragment="header" class="mb-3">
@@ -124,6 +129,7 @@
                     <input class="form-control me-2" id="searchCriteria" type="search" placeholder="Search Name/ID" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit" onclick="callSearch()">Search</button>
                 </form>
+<<<<<<< HEAD
                 <script th:inline="javascript">
                     let form = document.getElementById("searchForm");
                     function handleForm(event) {
@@ -176,6 +182,22 @@
 <!--                        </form>-->
 <!--                    </div>-->
 <!--                </form>-->
+=======
+                <form autocomplete="off" action="">
+                    <div class="autocomplete">
+                      <input id="localPartnersSearchBar" type="text" name="localPartnersSearchBar" placeholder="Search Local Partners">
+                    </div>
+                </form>
+
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" value="Sign Out" id="logout_button" class="btn btn-primary">Logout</button>
+                </form>
+
+                <script th:inline="javascript">
+                    var partners = ["MBALE", "SOROTI", "BUSIA", "LANGO", "ACHOLI", "MASINDI", "KAMPALA", "JINJA", "KIBOGA"];
+                    window.onload = autocomplete(document.getElementById("localPartnersSearchBar"), partners);
+                </script>
+>>>>>>> master
             </div>
         </div>
     </nav>

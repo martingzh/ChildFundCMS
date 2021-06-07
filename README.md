@@ -11,6 +11,10 @@ NOTE: to get this working
 java -version  --> should be [java version "10.0.2" 2018-07-17] or greater
 2.  follow this article to create a system.properties and add java.runtime.version=11
 https://devcenter.heroku.com/articles/java-support
+3.  Adjust the the JDBC url you use to run locally, replace the system env by running 
+ ```
+ export DATABASE_URL=postgres://twvcxtnjmotzym:d62b0f301908da0f8f4797643a35403b63d9d42d6820a8aaec7c7c57ba9f3cc2@ec2-54-211-176-156.compute-1.amazonaws.com:5432/d63otge472kq68 
+  ```
 
 then follow steps in the tutorial to build and run. 
 
@@ -32,68 +36,67 @@ The form collected from Kobotoolbox gets sent to our system via a POST when the 
 
 ```
 {
-  "_id": 98796057,
+  "_id": 99009124,
   "_notes": [],
-  "group_general/Community_ID": "123123",
+  "group_childInfo/Child_Photo": "indy_bitmoji-14_0_59.jpeg",
+  "group_general/Community_ID": "123567",
   "_tags": [],
   "group_general/Country_Office": "Uganda",
-  "group_childInfo/Child_date_of_birth": "2017-02-16",
+  "group_interview/Child_Present_For_Interview": "yes",
   "group_general/Community_Name": "Kigali",
-  "group_discussed": [
-    {
-      "group_discussed/Discussion_Subject": "Discussion Topic #1"
-    },
-    {
-      "group_discussed/Discussion_Subject": "Discussion Topic #2"
-    }
-  ],
   "_xform_id_string": "afFiSH2iFqfS59HKeprcwU",
-  "_validation_status": {},
-  "meta/instanceID": "uuid:847ae7df-425f-419f-909d-2bb7b94ca515",
+  "meta/instanceID": "uuid:4b3622c9-e8f5-4776-8766-c80453b073ab",
   "group_childInfo/Child_Age": "4",
-  "end": "2021-06-03T10:29:44.921-03:00",
+  "end": "2021-06-04T14:02:34.060-03:00",
   "group_interview/Interview_Conducted_With": "child",
   "group_general/Local_Partner_Name": "Partner Name",
-  "group_interview/Participated_Activities": "childrens_clubs child_protection",
+  "group_childInfo/Child_number": "555544444",
   "group_health/Danger": "no",
-  "start": "2021-06-03T10:26:45.712-03:00",
+  "start": "2021-06-04T13:59:18.882-03:00",
   "_geolocation": [
     null,
     null
   ],
-  "group_ec03d69": [
-    {
-      "group_ec03d69/Agreed_Action": "Action #1"
-    }
-  ],
-  "group_general/Village": "Village",
-  "_status": "submitted_via_web",
-  "__version__": "v5aLJ6GTGU2x5W5bb7CTsL",
-  "group_childInfo/Visitor_Name": "Volunteer Name",
-  "today": "2021-06-02",
+  "_validation_status": {},
+  "group_general/Village": "Village Name",
+  "group_health/Health_Issue": "Chest congestion",
+  "__version__": "vEUH3uxr3kuvQW3vS2xYuD",
+  "group_childInfo/Visitor_Name": "Matt Creaser",
+  "today": "2021-06-03",
   "deviceid": "ee.kobotoolbox.org:WSlwsrAh7nwtMMWn",
   "group_childInfo/Child_Sex": "male",
-  "group_childInfo/Child_number": "123456789",
-  "group_interview/Benefit_Activities": "activity_relevant_to_life_stage people_or_institutions",
-  "_uuid": "847ae7df-425f-419f-909d-2bb7b94ca515",
-  "group_general/Country_Office_ID": "54321",
-  "group_education/School_Type": "public",
-  "group_childInfo/Child_Life_Stage": "lifeStage1",
+  "group_interview/Participated_Activities": "parenting_workshops childrens_clubs youth_clubs school_governance",
+  "group_interview/Benefit_Activities": "activity_positive_change actvivity_physical_environment activity_service_access",
+  "_uuid": "4b3622c9-e8f5-4776-8766-c80453b073ab",
+  "group_general/Country_Office_ID": "123543",
+  "group_education/School_Type": "private",
+  "group_childInfo/Child_Life_Stage": "lifeStage2",
   "_submitted_by": null,
-  "group_childInfo/Child_first_name": "Matt",
-  "group_childInfo/Child_Cluster_Family_Group": "FamilyGroup",
-  "group_interview/Date_of_immunization": "2020-11-11",
+  "group_childInfo/Child_first_name": "Indiana",
+  "group_childInfo/Child_Cluster_Family_Group": "Family Group",
+  "group_health/Health_Issue_Remediation": "Recommended antibiotic delivery",
+  "_status": "submitted_via_web",
   "formhub/uuid": "6c3302f147cd4df28efb81f0627c2753",
-  "group_interview/immunized": "yes",
-  "group_interview/Nutrition_Counselling": "yes",
-  "group_general/Local_Partner_ID": "12345",
-  "group_childInfo/Child_other_name": "Creaser",
-  "group_interview/Child_Present_For_Interview": "yes",
-  "_attachments": [],
+  "_submission_time": "2021-06-04T17:02:44",
+  "group_general/Local_Partner_ID": "43251",
+  "group_childInfo/Child_other_name": "Jones",
+  "group_childInfo/Child_date_of_birth": "2011-07-20",
+  "_attachments": [
+    {
+      "mimetype": "image/jpeg",
+      "download_small_url": "https://kc.kobotoolbox.org/media/small?media_file=victoryee%2Fattachments%2F6c3302f147cd4df28efb81f0627c2753%2F4b3622c9-e8f5-4776-8766-c80453b073ab%2Findy_bitmoji-14_0_59.jpeg",
+      "download_large_url": "https://kc.kobotoolbox.org/media/large?media_file=victoryee%2Fattachments%2F6c3302f147cd4df28efb81f0627c2753%2F4b3622c9-e8f5-4776-8766-c80453b073ab%2Findy_bitmoji-14_0_59.jpeg",
+      "download_url": "https://kc.kobotoolbox.org/media/original?media_file=victoryee%2Fattachments%2F6c3302f147cd4df28efb81f0627c2753%2F4b3622c9-e8f5-4776-8766-c80453b073ab%2Findy_bitmoji-14_0_59.jpeg",
+      "filename": "victoryee/attachments/6c3302f147cd4df28efb81f0627c2753/4b3622c9-e8f5-4776-8766-c80453b073ab/indy_bitmoji-14_0_59.jpeg",
+      "instance": 99009124,
+      "download_medium_url": "https://kc.kobotoolbox.org/media/medium?media_file=victoryee%2Fattachments%2F6c3302f147cd4df28efb81f0627c2753%2F4b3622c9-e8f5-4776-8766-c80453b073ab%2Findy_bitmoji-14_0_59.jpeg",
+      "id": 36318182,
+      "xform": 655694
+    }
+  ],
   "group_education/Child_In_School": "yes",
-  "group_education/School_Grade": "pre_kindergarten",
-  "_submission_time": "2021-06-03T13:29:55",
-  "group_health/Healthy": "yes"
+  "group_education/School_Grade": "6",
+  "group_health/Healthy": "no"
 }
 ```
 
