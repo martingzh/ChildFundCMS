@@ -116,44 +116,55 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     
                 </ul>
-                <div class="topnav">
-                <div class="search-container">
-                <form th:object="${search}" th:action="@{/search1}" method="get" class="d-flex">
-                    <input class="form-control" th:name="id" type="search" placeholder="Search Name/ID" aria-label="Search">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                    <div class="dropdown">
-                    <div class="dropdown-content">
-                    <div th:if="${search != null and not #lists.isEmpty(search)}">
-                        <a th:each="child : ${search}">
-                            <p th:text="${child.firstName}" >CHILD.FIRSTNAME</p>
-                        </a>
-                    </div>
-                    </div>
-                    </div>
+                <form class="d-flex" id="searchForm">
+                    <input class="form-control me-2" id="searchCriteria" type="search" placeholder="Search Name/ID" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit" onclick="callSearch()">Search</button>
                 </form>
-                </div>
-                </div>
+                <script th:inline="javascript">
+                    let form = document.getElementById("searchForm");
+                    function handleForm(event) {
+                        event.preventDefault();
+                    }
+                    form.addEventListener('submit', handleForm);
 
-
-
-<!--                <script th:inline="javascript">
-                    function callSearch(){
-                        let searchCriteria = document.getElementById("searchString").value;
+                    function callSearch() {
+                        let searchCriteria = document.getElementById("searchCriteria").value;
                         console.log(searchCriteria)
+                        const url = "http://localhost:8080/childSearch?searchCriteria=" + searchCriteria;
                         const Http = new XMLHttpRequest();
-                        const url ="http://localhost:8080/search1?id=" + searchCriteria;
-                        Http.open("GET", url)
+                        Http.open("GET", url, true)
                         Http.send();
                         Http.onreadystatechange = (e) => {
-                            console.log(Http.responseText)
-                        }
+                            if(Http.readyState === XMLHttpRequest.DONE) {
+                                let status = Http.status;
+                                if (status === 0 || (status >= 200 && status < 400)) {
+                                    let form = document.getElementById("searchForm");
+                                    let i=0;
+                                    while (form.firstChild) {
+                                        i++;
+                                        if(i > 1) {
+                                            form.removeChild(form.lastChild);
+                                        }
+                                    }
+                                    let result = JSON.parse(Http.responseText);
+                                    for (let i = 0; i < result.length; i++) {
+                                        let option = document.createElement('a');
+                                        option.id = i
+                                        option.className = "dropdown-item";
+                                        option.href = "https://google.com"
+                                        option.text = result[i].Name;
+                                        form.appendChild(option)
+                                    }
 
+                                }
+                            }
+                        }
                     }
-                </script>-->
+                </script>
 <!--                <form class="d-flex">-->
 <!--                    <div class="form-group blu-margin">-->
 <!--                        <form name="childSearch" th:object="${childSearch}" th:action="@{/childSearch}" method="get">-->

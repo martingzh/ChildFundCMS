@@ -11,7 +11,5 @@ public interface SearchChild {
 
   List<Child> findAllChildrenByName(String firstName);
 
-  List<Child> findAllChildrenByOtherName(String otherName);
-
   Child findChildById(String Id);
 }
