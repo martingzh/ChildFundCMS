@@ -1,0 +1,97 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Child Detail</title>
+    <th:block th:include="fragments/layout.html :: headerfiles"></th:block>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
+    <Style>
+        .table{
+            font-family: sans-serif;
+            border-collapse: collapse;
+        }
+
+        .table th
+        .table td{
+            padding:10px;
+            border:1px solid#cccccc;
+        }
+
+        .table th {
+            background: #888888;
+            color: #ffffff;
+        }
+        .table.sticky th {
+            position: sticky;
+            top: 0;
+        }
+        .table.sticky th::after {
+            content:'';
+            width:100%;
+            height:2px;
+            position: absolute;
+            bottom: 0;
+            left:0;
+            background: black;
+
+        }
+    </Style>
+</head>
+<body>
+
+<header th:insert="fragments/layout.html :: header"> </header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="card m-5" style="height: 600px">
+                <div class="card-body">
+                    <h2 class="card-title">Children Who Need </h2>
+                    <h2 class="card-title">Immediate Attention</h2>
+                    <hr>
+                    <div class="table-responsive" style="height: 450px">
+                        <table class="table table-hover table-sm sticky">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>   DOB   </th>
+                                <th>Gender</th>
+                                <th>Village</th>
+                                <th>School</th>
+                                <th>family</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="child,iterStat : ${children}" th:class="${iterStat.odd}? 'odd'">
+                                <td th:text="${child.getId()}">26475934</td>
+                                <td th:text="${child.getName()}">XYZ</td>
+                                <td th:text="${child.getAge()}">2.41</td>
+                                <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                <td th:text="${child.getSex()}">Male</td>
+                                <td th:text="${child.getVillage()}">ABC</td>
+                                <td th:text="${child.getSchool()}">CDE</td>
+                                <td th:text="${child.getFamily()}">FGH</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="card m-5" style="height: 600px" >
+                <div class="card-body">
+                    <h2 class="card-title">Community Offices </h2>
+                    <h2 class="card-title">Spotlight/Updates</h2>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+
+<div th:replace="fragments/layout.html :: footer"></div></body>
+</html>
