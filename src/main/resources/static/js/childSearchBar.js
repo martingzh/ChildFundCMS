@@ -20,9 +20,9 @@ function child_autocomplete(inp, arr) {
         for (i = 0; i < arr.length; i++) {
                 b = document.createElement("DIV");
                 b.innerHTML += arr[i].name;
-                b.innerHTML += "<input type='hidden' id='"+arr[i].id+"' value='"+arr[i].name+"'>";
+                b.innerHTML += "<input type='hidden'  id='"+arr[i].id+"' value='"+arr[i].id+"'>";
                 b.addEventListener("click", function(e) {
-                    location.href =  base_url+ "/childfund/child/" + inp.getElementsByTagName("input")[0].id;
+                    location.href =  base_url+ "/childfund/child/" + b.getElementsByTagName("input")[0].value;
                     closeAllLists();
                 });
                 a.appendChild(b);

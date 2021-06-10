@@ -62,7 +62,6 @@ public class UserDao {
   public List<Child> getAllChildQuestionnairesById(String childId) {
     List<Child> children = new ArrayList<>();
     Connection connection = null;
-
     try {
       connection = dataSource.getConnection();
       PreparedStatement preparedStatement = connection.prepareStatement(get_sql);
