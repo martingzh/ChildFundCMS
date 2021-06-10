@@ -24,8 +24,6 @@ public class ChildSearchController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   public @ResponseBody List<HashMap<String, String>> getChildById(
       @RequestParam(name = "searchCriteria") String searchCriteria) {
-    System.out.println("entering");
-    System.out.println("search criteria " + searchCriteria);
     List<HashMap<String, String>> result = new ArrayList<>();
     HashMap<String, String> resultJSON = new HashMap<>();
     if (!StringUtils.isEmpty(searchCriteria)) {
@@ -39,9 +37,7 @@ public class ChildSearchController {
         }
         result.add(resultJSON);
       }
-      System.out.println("before list call " + searchCriteria);
       List<Child> children = searchChild.findAllChildrenByName(searchCriteria);
-      System.out.println("after list call " + children.size());
       if (!CollectionUtils.isEmpty(children)) {
         for (Child child1 : children) {
           if (child1 != null && child1.getId() != null) {

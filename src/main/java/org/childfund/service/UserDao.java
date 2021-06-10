@@ -2,6 +2,8 @@ package org.childfund.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -59,8 +61,11 @@ public class UserDao {
 
   public List<Child> getAllChildQuestionnairesById(String childId) {
     List<Child> children = new ArrayList<>();
+    Connection connection = null;
+
     try {
-      PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(get_sql);
+      connection = dataSource.getConnection();
+      PreparedStatement preparedStatement = connection.prepareStatement(get_sql);
       preparedStatement.setString(1, childId);
       ResultSet ret = preparedStatement.executeQuery();
       while (ret.next()) {
@@ -68,6 +73,13 @@ public class UserDao {
       }
     } catch (Exception throwables) {
       throwables.printStackTrace();
+    }
+    if (connection!=null){
+      try {
+        connection.close();
+      } catch (SQLException throwables) {
+        throwables.printStackTrace();
+      }
     }
     return children;
   }

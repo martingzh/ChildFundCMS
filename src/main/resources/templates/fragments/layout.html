@@ -26,9 +26,8 @@
               <form autocomplete="off" action="" th:id="searchForm">
                 <div class="autocomplete">
                     <input th:id="searchCriteria" type="text" name="searchCriteria"
-                           placeholder="Search Name/ID">
+                           placeholder="Search Name/ID" oninput="callSearch()">
                 </div>
-                  <button type="submit" class="btn btn-outline-success" onclick="callSearch()">Search</button>
                 </form>
                 <form autocomplete="off" action="">
                     <div class="autocomplete">
@@ -40,38 +39,20 @@
                     <button type="submit" value="Sign Out" id="logout_button" class="btn btn-primary">Logout</button>
                 </form>
                 <script th:inline="javascript">
-                    let formName = document.getElementById("searchForm");
-                    let form = document.getElementById("searchCriteria");
-                    function handleForm(event) {
-                        event.preventDefault();
-                    }
-                    formName.addEventListener('submit', handleForm);
                     function callSearch() {
                         let searchCriteria = document.getElementById("searchCriteria").value;
-                        console.log(unescape(searchCriteria))
-                        let URL = "http://localhost:8080/childfund/child/childSearch?searchCriteria=" + searchCriteria;
-                        $.ajax({
-                            url : URL,
-                            type : "GET" ,
-                            success : function (result) {
-                                console.log(result)
-                                child_autocomplete(document.getElementById("searchCriteria"), result)
-                                // for (let i = 0; i < result.length; i++) {
-                                //     let option = document.createElement('a');
-                                //     //               option = document.createElement("DIV");
-                                //     option.setAttribute("id", form.id + "autocomplete-list");
-                                //     option.setAttribute("class", "autocomplete-items");
-                                //     //                 /*append the DIV element as a child of the autocomplete container:*/
-                                //     option.href = "http://localhost:8080/childfund/child/" + result[i].id
-                                //     console.log(option.href)
-                                //     option.text = result[i].name;
-                                //     //                 // form.appendChild(option)
-                                //     form.appendChild(option);
-                                //     //             }
-                                // }
-                             }
-                            }
-                        )
+                        if (searchCriteria.length > 3) {
+                            let URL = window.location.origin + "/childfund/child/childSearch?searchCriteria=" + unescape(searchCriteria);
+                            $.ajax({
+                                    url: URL,
+                                    type: "GET",
+                                    success: function (result) {
+                                        child_autocomplete(document.getElementById("searchCriteria"), result)
+
+                                    }
+                                }
+                            )
+                        }
                     }
                 </script>
                 <script th:inline="javascript">
