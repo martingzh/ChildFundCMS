@@ -31,15 +31,18 @@ public class UserDao {
   private static final String get_questionnaire_by_fn_or_on =
       "select questionnaire_jsonb from user_questionnaire where lower(questionnaire_jsonb::json->>'group_childInfo/Child_first_name') like lower(?) or lower(questionnaire_jsonb::json->>'group_childInfo/Child_other_name') like lower(?)";
 
-  private static final String GET_IMMEDIATE_ATTENTION_STUDENTS_SQL = "select questionnaire_jsonb from " + USER_QUESTIONNAIRE_TABLE +
-          " where (questionnaire_jsonb::json->>'_submission_time')::timestamp without time zone >= ?::timestamp without time zone " +
-          "and (lower(questionnaire_jsonb::json->>'group_health/Healthy') = 'yes' " +
-          "or lower(questionnaire_jsonb::json->>'group_health/Danger') = 'yes' " +
-          "or questionnaire_jsonb::json->>'group_interview/Participated_Activities' IS NULL " +
-          "or questionnaire_jsonb::json->>'group_interview/Benefit_Activities' IS NULL " +
-          "or (lower(questionnaire_jsonb::json->>'group_education/Child_In_School') = 'yes' and  lower(questionnaire_jsonb::json->>'group_childInfo/Child_Life_Stage') = 'lifestyle2' ))";
+  private static final String GET_IMMEDIATE_ATTENTION_STUDENTS_SQL =
+      "select questionnaire_jsonb from "
+          + USER_QUESTIONNAIRE_TABLE
+          + " where (questionnaire_jsonb::json->>'_submission_time')::timestamp without time zone >= ?::timestamp without time zone "
+          + "and (lower(questionnaire_jsonb::json->>'group_health/Healthy') = 'yes' "
+          + "or lower(questionnaire_jsonb::json->>'group_health/Danger') = 'yes' "
+          + "or questionnaire_jsonb::json->>'group_interview/Participated_Activities' IS NULL "
+          + "or questionnaire_jsonb::json->>'group_interview/Benefit_Activities' IS NULL "
+          + "or (lower(questionnaire_jsonb::json->>'group_education/Child_In_School') = 'yes' and  lower(questionnaire_jsonb::json->>'group_childInfo/Child_Life_Stage') = 'lifestyle2' ))";
 
-  private static final String allStudentsSQL = "select questionnaire_jsonb from " + USER_QUESTIONNAIRE_TABLE;
+  private static final String allStudentsSQL =
+      "select questionnaire_jsonb from " + USER_QUESTIONNAIRE_TABLE;
 
   @Autowired private DataSource dataSource;
 
@@ -72,9 +75,11 @@ public class UserDao {
   public List<Child> getAllImmediateAttentionChildren(LocalDateTime startDateTimeOfSubmission) {
     List<Child> children = new ArrayList<>();
     try {
-      PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(GET_IMMEDIATE_ATTENTION_STUDENTS_SQL);
+      PreparedStatement preparedStatement =
+          dataSource.getConnection().prepareStatement(GET_IMMEDIATE_ATTENTION_STUDENTS_SQL);
       preparedStatement.setObject(1, startDateTimeOfSubmission);
-//      PreparedStatement preparedStatement = dataSource.getConnection().prepareStatement(allStudentsSQL);
+      //      PreparedStatement preparedStatement =
+      // dataSource.getConnection().prepareStatement(allStudentsSQL);
       ResultSet ret = preparedStatement.executeQuery();
       while (ret.next()) {
         children.add(convertToChildObj(ret.getString("questionnaire_jsonb")));
