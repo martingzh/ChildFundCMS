@@ -24,8 +24,11 @@ public class UserService {
   }
 
   public Child getChildById(String childId) {
+    Child child = new Child();
     List<Child> childInfo = userDao.getAllChildQuestionnairesById(childId);
-    Child child = getLatestSubmission(childInfo);
+    if (childInfo != null && !childInfo.isEmpty()) {
+      child = getLatestSubmission(childInfo);
+    }
     return child;
   }
 

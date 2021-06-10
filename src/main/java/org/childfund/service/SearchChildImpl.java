@@ -9,7 +9,6 @@ import org.springframework.util.CollectionUtils;
 
 @Component
 public class SearchChildImpl implements SearchChild {
-
   @Autowired private UserService userService;
 
   @Override
@@ -25,6 +24,6 @@ public class SearchChildImpl implements SearchChild {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return new Child();
+    return null;
   }
 }

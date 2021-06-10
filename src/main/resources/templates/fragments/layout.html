@@ -1,12 +1,15 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:fragment="headerfiles">
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link th:href="@{/css/layout.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/js/partnersSearchBar.js}"></script>
+    <script type="text/javascript" th:src="@{/js/childSearchBar.js}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body>
 <div th:fragment="header" class="mb-3">
@@ -20,9 +23,11 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search Name/ID" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+              <form autocomplete="off" action="" th:id="searchForm">
+                <div class="autocomplete">
+                    <input th:id="searchCriteria" type="text" name="searchCriteria"
+                           placeholder="Search Name/ID" oninput="callSearch()">
+                </div>
                 </form>
                 <form autocomplete="off" action="">
                     <div class="autocomplete">
@@ -33,7 +38,23 @@
                 <form th:action="@{/logout}" method="post">
                     <button type="submit" value="Sign Out" id="logout_button" class="btn btn-primary">Logout</button>
                 </form>
+                <script th:inline="javascript">
+                    function callSearch() {
+                        let searchCriteria = document.getElementById("searchCriteria").value;
+                        if (searchCriteria.length > 3) {
+                            let URL = window.location.origin + "/childfund/child/childSearch?searchCriteria=" + unescape(searchCriteria);
+                            $.ajax({
+                                    url: URL,
+                                    type: "GET",
+                                    success: function (result) {
+                                        child_autocomplete(document.getElementById("searchCriteria"), result)
 
+                                    }
+                                }
+                            )
+                        }
+                    }
+                </script>
                 <script th:inline="javascript">
                     var partners = ["MBALE", "SOROTI", "BUSIA", "LANGO", "ACHOLI", "MASINDI", "KAMPALA", "JINJA", "KIBOGA"];
                     window.onload = autocomplete(document.getElementById("localPartnersSearchBar"), partners);
