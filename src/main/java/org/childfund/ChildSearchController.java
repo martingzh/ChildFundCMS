@@ -27,7 +27,6 @@ public class ChildSearchController {
     
     List<HashMap<String, String>> result = new ArrayList<>();
     HashMap<String, String> resultJSON = new HashMap<>();
-    
     if (!StringUtils.isEmpty(searchCriteria)) {
       Child child = searchChild.findChildById(searchCriteria);
       if (child != null && child.getId() != null) {
