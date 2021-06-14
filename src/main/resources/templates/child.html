@@ -295,7 +295,7 @@
             </div>
 
             <!-- Participation Details -->
-            <div class="modal fade" id="participationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <div class="modal fade" id="participationModal" tabindex="-1" aria-labelledby="childParticipation"
                  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                     <div class="modal-content">
@@ -340,6 +340,66 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Presence -->
+            <div class="card m-3">
+                <div class="card-body">
+                    <h3 class="display-6">Child Presence</h3>
+                    <canvas id="scatterChart" width="400" height="100"></canvas>
+                    <script th:inline="javascript">
+                    /*<![CDATA[*/
+                        var labels = [];
+                        var safetyScores = [];
+                        var healthScores = [];
+                        var educationScores = [];
+                        var participationScores = [];
+                        /*[# th:each="score : ${scores}"]*/
+                        labels.push(`[[${score.date}]]`);
+                        safetyScores.push("[[${score.safety}]]");
+                        healthScores.push("[[${score.health}]]");
+                        educationScores.push("[[${score.education}]]");
+                        participationScores.push("[[${score.participation}]]");
+                        /*[/]*/
+
+                        const data = {
+                            datasets: [{
+                                label: 'Scatter Dataset',
+                                data: [{
+                                    x: -10,
+                                    y: 0
+                                    }, {
+                                    x: 0,
+                                    y: 10
+                                    }, {
+                                    x: 10,
+                                    y: 5
+                                    }, {
+                                    x: 0.5,
+                                    y: 5.5
+                                }],
+                                backgroundColor: 'rgb(255, 99, 132)'
+                            }],
+                        };
+
+                        //const DATA_COUNT = 7;
+                        //const NUMBER_CFG = {count: DATA_COUNT, rmin: 1, rmax: 1, min: 0, max: 100};
+                        var ctx = document.getElementById('scatterChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'scatter',
+                            data: data,
+                            options: {
+                                scales: {
+                                    x: {
+                                        type: 'linear',
+                                        position: 'bottom'
+                                    }
+                                }
+                            }
+                        });
+                    /*]]>*/
+                    </script>
                 </div>
             </div>
 

@@ -114,8 +114,10 @@ public class UserDao {
         Health health = mapper.readValue(json, Health.class);
         Education education = mapper.readValue(json, Education.class);
         Participation participation = mapper.readValue(json, Participation.class);
+        Presence presence = mapper.readValue(json, Presence.class);
 
-        submissions.add(new FormSubmission(child, safety, health, education, participation));
+        submissions.add(
+            new FormSubmission(child, safety, health, education, participation, presence));
       }
     } catch (Exception throwables) {
       throwables.printStackTrace();

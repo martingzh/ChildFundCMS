@@ -37,6 +37,7 @@ public class ChildController {
       model.addAttribute("health", submission.getHealth());
       model.addAttribute("education", submission.getEducation());
       model.addAttribute("participation", submission.getParticipation());
+      model.addAttribute("presence", submission.getPresence());
       model.addAttribute("scores", scores);
 
     } catch (Exception ex) {
@@ -65,6 +66,8 @@ public class ChildController {
       produces = "application/json")
   public ResponseEntity<String> getAllChildQuestionnairesById(
       @PathVariable(value = "id") String childId) {
+    // public ResponseEntity<String> getAllQuestionnaires(@PathVariable(value = "id") String
+    // childId) {
     try {
       String json = userService.getAllChildQuestionnairesById(childId);
       return ResponseEntity.ok(json);
