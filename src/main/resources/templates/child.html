@@ -144,9 +144,14 @@
                             },
                             options: {
                                 scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            callback: function(value, index, values) {
+                                                return yLabels[value];
+                                            }
+                                        }
+                                    }],
                                 },
                                 plugins: {
                                     legend: {
@@ -345,45 +350,84 @@
 
             <!-- Presence -->
             <div class="card m-3">
-                <div class="card-body">
+                <div class="card-body" >
                     <h3 class="display-6">Child Presence</h3>
                     <canvas id="scatterChart" width="400" height="100"></canvas>
                     <script th:inline="javascript">
                     /*<![CDATA[*/
-                        var labels = [];
-                        var safetyScores = [];
-                        var healthScores = [];
-                        var educationScores = [];
-                        var participationScores = [];
-                        /*[# th:each="score : ${scores}"]*/
-                        labels.push(`[[${score.date}]]`);
-                        safetyScores.push("[[${score.safety}]]");
-                        healthScores.push("[[${score.health}]]");
-                        educationScores.push("[[${score.education}]]");
-                        participationScores.push("[[${score.participation}]]");
+                        var xAxis = [];
+                        var yAxis = [];
+                        var childData = [];
+                        console.log("Presence " + `[[${presence}]]`);
+                        console.log("TIME " + `[[${child.submissionTime}]]`);
+                        console.log("CHILD " + `[[${child}]]`);
+                        childData.push({x:`[[${child.submissionTime}]]`, y: `[[${presence}]]`});
+                        console.log("DATAAAAA " + childData[0].x);
+                        console.log("DATAAAAA2 " + childData[0].y);
+                        var pHistory = [[${presenceHistory}]];
+                        console.log("Presence History " + `[[${presenceHistory}]]`);
+
+                        /*[# th:each="childPresence : ${presence}"]*/
+                        // xAxis.push(`[[${presence}]]`);
+                        // yAxis.push("[[${presence}]]");
+
                         /*[/]*/
+
+                        var yLabels = /*[[${T(org.childfund.models.Presence.NotPresentReason).values()}]]*/""
+                        var yLabelsPresent = /*[[${T(org.childfund.models.Presence.PresenceStatus).values()}]]*/""
+
+                        var yLabels2 = /*[[${T(org.childfund.models.Presence.NotPresentReason)}]]*/""
+                        var yLabels3 = /*[[${T(org.childfund.models.Presence.NotPresentReason).getEnumConstants()}]]*/""
+
+                        var yAxesLabels = Object.values(yLabels).concat(Object.values(yLabelsPresent));
+
+                        var xAxisLabels = Object.keys(pHistory);
+
+                        var allYLabels = yLabels.concat(yLabelsPresent);
+                        var allYLabelsObject = {...allYLabels};
+                        var allXLabelsObject = {...Object.keys(pHistory)};
+                        const dataValues = [];
+                        // build data
+                        for(visit in pHistory) {
+                            const presenceStatus = pHistory[visit]["group_interview/Child_Present_For_Interview"];
+                            const communityStatus = pHistory[visit]["group_interview/Child_Present_In_Community"];
+                            if (presenceStatus == "NOT_PRESENT") {
+                                 // check if present in community
+                                 if (communityStatus) {
+                                     // add present_in_community value
+                                     dataValues.push({"x": visit, "y": communityStatus});
+                                 } else {
+                                     // add NOT_PRESENT
+                                     dataValues.push({"x": visit, "y": presenceStatus});
+
+                                 }
+                            } else if (presenceStatus == "INTERVIEW_REFUSED") {
+                                    // add INTERVIEW_REFUSED
+                                    dataValues.push({"x": visit, "y": presenceStatus});
+
+                            } else if (presenceStatus == "PRESENT") {
+                                    // add PRESENT
+                                    dataValues.push({"x": visit, "y": presenceStatus});
+                            }
+                        }
+
+                        console.log("Presence enum test " + yLabels);
+                        yLabelsMap = yLabels.map(yLabel => yLabel.displayText);
+                        console.log("map test! " + yLabelsMap);
+
+                         // need to make a list of {x: -10, y: 0}
+                        // x equals the date
+                        // y equals location
+                            // present or one of the not present reasons
 
                         const data = {
                             datasets: [{
-                                label: 'Scatter Dataset',
-                                data: [{
-                                    x: -10,
-                                    y: 0
-                                    }, {
-                                    x: 0,
-                                    y: 10
-                                    }, {
-                                    x: 10,
-                                    y: 5
-                                    }, {
-                                    x: 0.5,
-                                    y: 5.5
-                                }],
+                                data: dataValues,
                                 backgroundColor: 'rgb(255, 99, 132)'
                             }],
                         };
 
-                        //const DATA_COUNT = 7;
+                        const DATA_COUNT = xAxisLabels.length;
                         //const NUMBER_CFG = {count: DATA_COUNT, rmin: 1, rmax: 1, min: 0, max: 100};
                         var ctx = document.getElementById('scatterChart').getContext('2d');
                         var myChart = new Chart(ctx, {
@@ -391,10 +435,22 @@
                             data: data,
                             options: {
                                 scales: {
-                                    x: {
-                                        type: 'linear',
-                                        position: 'bottom'
-                                    }
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            callback: function(value, index, values) {
+                                                return allXLabelsObject[value];
+                                            }
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            callback: function(value, index, values) {
+                                                return allYLabelsObject[value];
+                                            }
+                                        }
+                                    }]
                                 }
                             }
                         });

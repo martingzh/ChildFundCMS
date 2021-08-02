@@ -47,6 +47,13 @@ public class UserService {
     return childInfos.get(0);
   }
 
+  public List<FormSubmission> getChildSubmissions(String childId) {
+    List<FormSubmission> submissions = userDao.getFormSubmissions(childId);
+    submissions.sort(this::sortBySubmissionDate);
+
+    return submissions;
+  }
+
   private String getChildId(String payload) {
     String childId = "N/A";
     JSONParser parser = new JSONParser(payload);
@@ -79,10 +86,15 @@ public class UserService {
     }
     return 0;
   }
+  public List<Child> getChildQuestionnairesById(String childId) {
+    List<Child> childInfo = userDao.getAllChildQuestionnairesById(childId);
+
+    return childInfo;
+  }
 
   public String getAllChildQuestionnairesById(String childId) {
 
-    List<Child> childInfo = userDao.getAllChildQuestionnairesById(childId);
+    List<Child> childInfo = getChildQuestionnairesById(childId);
     try {
       return mapper.writeValueAsString(childInfo);
     } catch (JsonProcessingException e) {

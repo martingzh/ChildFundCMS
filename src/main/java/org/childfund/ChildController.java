@@ -2,8 +2,13 @@ package org.childfund;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.childfund.models.Child;
 import org.childfund.models.FormSubmission;
+import org.childfund.models.Presence;
 import org.childfund.models.Score;
 import org.childfund.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +27,9 @@ public class ChildController {
   @GetMapping(path = "/{id}")
   public String getChildInfo(@PathVariable(value = "id") String childId, Model model) {
     try {
+      // todo: Need more than just the latest for scores and presence
       FormSubmission submission = userService.getLatestSubmission(childId);
+      List<FormSubmission> childSubmissions = userService.getChildSubmissions(childId);
 
       List<Score> scores =
           List.of(
@@ -32,6 +39,11 @@ public class ChildController {
               new Score(LocalDate.now().minus(1, ChronoUnit.MONTHS), 90, 70, 75, 40),
               new Score(LocalDate.now(), 90, 75, 80, 50));
 
+      Map<String, Presence> presenceHistory =  new HashMap<String, Presence>();
+      for(FormSubmission childSubmission : childSubmissions) {
+        presenceHistory.put(childSubmission.getSubmissionTime(), childSubmission.getPresence());
+      }
+
       model.addAttribute("child", submission.getChild());
       model.addAttribute("safety", submission.getSafety());
       model.addAttribute("health", submission.getHealth());
@@ -39,6 +51,7 @@ public class ChildController {
       model.addAttribute("participation", submission.getParticipation());
       model.addAttribute("presence", submission.getPresence());
       model.addAttribute("scores", scores);
+      model.addAttribute("presenceHistory", presenceHistory);
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -66,8 +79,6 @@ public class ChildController {
       produces = "application/json")
   public ResponseEntity<String> getAllChildQuestionnairesById(
       @PathVariable(value = "id") String childId) {
-    // public ResponseEntity<String> getAllQuestionnaires(@PathVariable(value = "id") String
-    // childId) {
     try {
       String json = userService.getAllChildQuestionnairesById(childId);
       return ResponseEntity.ok(json);

@@ -2,6 +2,7 @@ package org.childfund.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.lang.Nullable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Presence {
@@ -56,6 +57,10 @@ public class Presence {
       return displayText;
     }
 
+    public String getChoiceValue() {
+      return choiceValue;
+    }
+
     public static NotPresentReason getFromJson(String jsonValue) {
       for (NotPresentReason reason : values()) {
         if (reason.choiceValue.equals(jsonValue)) {
@@ -66,18 +71,18 @@ public class Presence {
     }
   }
 
-  @JsonProperty("group_interview/Child_Present_In_Community")
+  @JsonProperty("group_interview/Child_Present_For_Interview")
   private String status;
 
-  public void setStatus(String status) {
-    this.status = status;
-  }
+  @Nullable
+  @JsonProperty("group_interview/Child_Present_In_Community")
+  private String reason;
 
   public PresenceStatus getStatus() {
     return PresenceStatus.getFromJson(status);
   }
 
   public NotPresentReason getReason() {
-    return NotPresentReason.getFromJson(status);
+    return NotPresentReason.getFromJson(reason);
   }
 }

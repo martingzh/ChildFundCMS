@@ -2,7 +2,6 @@ package org.childfund.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,7 +72,7 @@ public class UserDao {
     } catch (Exception throwables) {
       throwables.printStackTrace();
     }
-    if (connection!=null){
+    if (connection != null) {
       try {
         connection.close();
       } catch (SQLException throwables) {
