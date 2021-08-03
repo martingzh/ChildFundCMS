@@ -356,37 +356,10 @@
                     <canvas id="presenceChart" width="auto" height="auto"></canvas>
                     <script th:inline="javascript">
                     /*<![CDATA[*/
-                        var xAxis = [];
-                        var yAxis = [];
-                        var childData = [];
-                        console.log("Presence " + `[[${presence}]]`);
-                        console.log("TIME " + `[[${child.submissionTime}]]`);
-                        console.log("CHILD " + `[[${child}]]`);
-                        childData.push({x:`[[${child.submissionTime}]]`, y: `[[${presence}]]`});
-                        console.log("DATAAAAA " + childData[0].x);
-                        console.log("DATAAAAA2 " + childData[0].y);
                         var pHistory = [[${presenceHistory}]];
-                        console.log("Presence History " + `[[${presenceHistory}]]`);
-
-                        /*[# th:each="childPresence : ${presence}"]*/
-                        // xAxis.push(`[[${presence}]]`);
-                        // yAxis.push("[[${presence}]]");
-
-                        /*[/]*/
 
                         var yLabels = /*[[${T(org.childfund.models.Presence.NotPresentReason).values()}]]*/""
                         var yLabelsPresent = /*[[${T(org.childfund.models.Presence.PresenceStatus).values()}]]*/""
-
-                        var yLabels2 = /*[[${T(org.childfund.models.Presence.NotPresentReason)}]]*/""
-                        var yLabels3 = /*[[${T(org.childfund.models.Presence.NotPresentReason).getEnumConstants()}]]*/""
-
-                        var yAxesLabels = Object.values(yLabels).concat(Object.values(yLabelsPresent));
-
-                        var xAxisLabels = Object.keys(pHistory);
-
-                        var allYLabels = yLabels.concat(yLabelsPresent);
-                        var allYLabelsObject = {...allYLabels};
-                        var allXLabelsObject = {...Object.keys(pHistory)};
 
                         // adding empty string at the beginning/end of array for visual purposes
                         var xMap = [''].concat(Object.keys(pHistory).sort());
