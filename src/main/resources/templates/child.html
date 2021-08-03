@@ -3,6 +3,7 @@
 <head>
     <title>Child Detail</title>
     <th:block th:include="fragments/layout.html :: headerfiles"></th:block>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
 </head>
 <body>
@@ -144,9 +145,14 @@
                             },
                             options: {
                                 scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            callback: function(value, index, values) {
+                                                return yLabels[value];
+                                            }
+                                        }
+                                    }],
                                 },
                                 plugins: {
                                     legend: {
@@ -345,55 +351,118 @@
 
             <!-- Presence -->
             <div class="card m-3">
-                <div class="card-body">
+                <div class="card-body" >
                     <h3 class="display-6">Child Presence</h3>
-                    <canvas id="scatterChart" width="400" height="100"></canvas>
+                    <canvas id="presenceChart" width="auto" height="auto"></canvas>
                     <script th:inline="javascript">
                     /*<![CDATA[*/
-                        var labels = [];
-                        var safetyScores = [];
-                        var healthScores = [];
-                        var educationScores = [];
-                        var participationScores = [];
-                        /*[# th:each="score : ${scores}"]*/
-                        labels.push(`[[${score.date}]]`);
-                        safetyScores.push("[[${score.safety}]]");
-                        healthScores.push("[[${score.health}]]");
-                        educationScores.push("[[${score.education}]]");
-                        participationScores.push("[[${score.participation}]]");
-                        /*[/]*/
+                        var pHistory = [[${presenceHistory}]];
 
-                        const data = {
-                            datasets: [{
-                                label: 'Scatter Dataset',
-                                data: [{
-                                    x: -10,
-                                    y: 0
-                                    }, {
-                                    x: 0,
-                                    y: 10
-                                    }, {
-                                    x: 10,
-                                    y: 5
-                                    }, {
-                                    x: 0.5,
-                                    y: 5.5
-                                }],
-                                backgroundColor: 'rgb(255, 99, 132)'
-                            }],
+                        var yLabels = /*[[${T(org.childfund.models.Presence.NotPresentReason).values()}]]*/""
+                        var yLabelsPresent = /*[[${T(org.childfund.models.Presence.PresenceStatus).values()}]]*/""
+
+                        // adding empty string at the beginning/end of array for visual purposes
+                        var xMap = [''].concat(Object.keys(pHistory).sort());
+                        var yMap = [''].concat(yLabels.concat(yLabelsPresent));
+                        xMap.push('');
+                        yMap.push('');
+
+                        var mapDataPoint = function(xValue, yValue) {
+                            return {
+                                x: xMap.indexOf(xValue),
+                                y: yMap.indexOf(yValue)
+                            };
                         };
 
-                        //const DATA_COUNT = 7;
-                        //const NUMBER_CFG = {count: DATA_COUNT, rmin: 1, rmax: 1, min: 0, max: 100};
-                        var ctx = document.getElementById('scatterChart').getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'scatter',
-                            data: data,
+                        const dataValues = [];
+                        // build data
+                        for(visit in pHistory) {
+                            const presenceStatus = pHistory[visit]["group_interview/Child_Present_For_Interview"];
+                            const communityStatus = pHistory[visit]["group_interview/Child_Present_In_Community"];
+                            if (presenceStatus == "NOT_PRESENT") {
+                                // check if present in community
+                                if (communityStatus) {
+                                // add present_in_community value
+                                dataValues.push(mapDataPoint(visit, communityStatus));
+                                } else {
+                                // add NOT_PRESENT
+                                dataValues.push(mapDataPoint(visit, presenceStatus));
+
+                                }
+                            } else if (presenceStatus == "INTERVIEW_REFUSED" || presenceStatus == "PRESENT") {
+                                // add INTERVIEW_REFUSED
+                                dataValues.push(mapDataPoint(visit, presenceStatus));
+                            } else {
+                                // add PRESENT
+                                console.log("Invalid input");
+                            }
+                        }
+
+                        console.log("Presence enum test " + yLabels);
+                        yLabelsMap = yLabels.map(yLabel => yLabel.displayText);
+                        console.log("map test! " + yLabelsMap);
+
+                        var chartColors = {
+                            red: 'rgb(255, 99, 132)',
+                            orange: 'rgb(255, 159, 64)',
+                            yellow: 'rgb(255, 205, 86)',
+                            green: 'rgb(75, 192, 192)',
+                            blue: 'rgb(54, 162, 235)',
+                            purple: 'rgb(153, 102, 255)',
+                            grey: 'rgb(231,233,237)'
+                        };
+
+                        var ctx = document.getElementById('presenceChart').getContext('2d');
+                        var myPresenceChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                datasets: [{
+                                    label: "Child's Presence",
+                                    data: dataValues,
+                                    fill: false,
+                                    showLine: false,
+                                    borderColor: chartColors.blue,
+                                    backgroundColor: chartColors.purple
+                                }]
+                            },
                             options: {
+                                responsive: true,
+                                title: {
+                                    display: true,
+                                    text: 'Child\'s Presence History'
+                                },
+                                legend: {
+                                    display: false
+                                },
                                 scales: {
                                     x: {
                                         type: 'linear',
-                                        position: 'bottom'
+                                        position: 'bottom',
+                                        title: {
+                                            display: true,
+                                            text: 'Visitation Dates'
+                                        },
+                                        min: 0,
+                                        max: xMap.length - 1,
+                                        ticks: {
+                                            stepSize: 1,
+                                            callback: function(value) {
+                                                return xMap[value];
+                                            },
+                                        },
+                                    },
+                                    y: {
+                                        title: {
+                                            display: true,
+                                            text: 'Location'
+                                        },
+                                        min: 0,
+                                        max: yMap.length - 1,
+                                        ticks: {
+                                            callback: function(value) {
+                                                return yMap[value];
+                                            },
+                                        },
                                     }
                                 }
                             }
