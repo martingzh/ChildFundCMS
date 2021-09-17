@@ -5,8 +5,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.childfund.models.Child;
 import org.childfund.models.FormSubmission;
 import org.childfund.models.Presence;
 import org.childfund.models.Score;
@@ -39,8 +37,8 @@ public class ChildController {
               new Score(LocalDate.now().minus(1, ChronoUnit.MONTHS), 90, 70, 75, 40),
               new Score(LocalDate.now(), 90, 75, 80, 50));
 
-      Map<String, Presence> presenceHistory =  new HashMap<String, Presence>();
-      for(FormSubmission childSubmission : childSubmissions) {
+      Map<String, Presence> presenceHistory = new HashMap<String, Presence>();
+      for (FormSubmission childSubmission : childSubmissions) {
         presenceHistory.put(childSubmission.getSubmissionTime(), childSubmission.getPresence());
       }
 

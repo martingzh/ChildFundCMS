@@ -86,6 +86,7 @@ public class UserService {
     }
     return 0;
   }
+
   public List<Child> getChildQuestionnairesById(String childId) {
     List<Child> childInfo = userDao.getAllChildQuestionnairesById(childId);
 
