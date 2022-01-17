@@ -22,4 +22,12 @@ public class ChildHomeController {
     model.addAttribute("children", children);
     return "childHome";
   }
+
+  @GetMapping("/immediateAttention")
+  public String retrieveChildrenListForImmediateAttention(Model model) {
+    List<Child> children =
+            immediateAttentionChildren.getRecentSurveyedChildren(NUMBER_OF_RECENT_DAYS_TO_CHECK);
+    model.addAttribute("children", children);
+    return "immediateAttention";
+  }
 }
