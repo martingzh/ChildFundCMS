@@ -19,20 +19,11 @@ public class HomeController {
   private static final int NUMBER_OF_RECENT_DAYS_TO_CHECK = 50;
 
   @Autowired private ImmediateAttentionChildren immediateAttentionChildren;
-  private ImmediateAttentionChildrenImpl impl;
 
   @GetMapping("/home")
   public String retrieveChildrenAndPartners(Model model) {
-//    List<Child> children =
-//        immediateAttentionChildren.getRecentSurveyedChildren(NUMBER_OF_RECENT_DAYS_TO_CHECK);
-    impl = new ImmediateAttentionChildrenImpl();
-    List<Child> children = impl.createHardCodedImmediateAttentionChildren();
-    ArrayList<LocalPartner> partners = new ArrayList<LocalPartner>();
-    for (LocalPartner partner : LocalPartner.values()) {
-      partners.add(partner);
-    }
-
-    model.addAttribute("localPartners", partners);
+    List<Child> children =
+        immediateAttentionChildren.getRecentSurveyedChildren(NUMBER_OF_RECENT_DAYS_TO_CHECK);
     model.addAttribute("immediateChildren", children);
     return "home";
   }
