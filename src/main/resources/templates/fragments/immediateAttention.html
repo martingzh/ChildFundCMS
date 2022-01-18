@@ -1,0 +1,444 @@
+<!DOCTYPE HTML>
+<html>
+<div th:fragment="header" class="mb-3">
+<head>
+    <title>Children who need Immediate Attention</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
+    <Style>
+        .table{
+            font-family: sans-serif;
+            border-collapse: collapse;
+        }
+
+        .table th
+        .table td{
+            padding:10px;
+            border:1px solid#cccccc;
+        }
+
+        .table th {
+            background: #888888;
+            color: #ffffff;
+        }
+        .table.sticky th {
+            position: sticky;
+            top: 0;
+        }
+        .table.sticky th::after {
+            content:'';
+            width:100%;
+            height:2px;
+            position: absolute;
+            bottom: 0;
+            left:0;
+            background: black;
+
+        }
+    </Style>
+</head>
+<body>
+
+<div class="immediateAttention-content" >
+        <h2 class="card-title">Children Who Need </h2>
+        <h2 class="card-title">Immediate Attention</h2>
+        <div class="row">
+            <div class="col-1"></div>
+            <!--            Mbale -->
+            <div class="col-5">
+                <div class="card m-5" style="height: 600px; width: 600px">
+                    <div class="card-body">
+                        <h2 class="card-title">Mbale</h2>
+                        <hr>
+                        <div class="table-responsive" style="height: 450px">
+                            <table class="table table-hover table-sm sticky">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>   DOB   </th>
+                                    <th>Gender</th>
+                                    <th>Village</th>
+                                    <th>School</th>
+                                    <th>Family</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == 'mbale']}" th:class="${iterStat.odd}? 'odd'">
+                                    <td th:text="${child.getId()}">26475934</td>
+                                    <td th:text="${child.getName()}">XYZ</td>
+                                    <td th:text="${child.getAge()}">2.41</td>
+                                    <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                    <td th:text="${child.getSex()}">Male</td>
+                                    <td th:text="${child.getVillage()}">ABC</td>
+                                    <td th:text="${child.getSchool()}">CDE</td>
+                                    <td th:text="${child.getFamily()}">FGH</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--            Soroti -->
+            <div class="col-1"></div>
+            <div class="col-5">
+                <div class="card m-5" style="height: 600px; width: 600px">
+                    <div class="card-body">
+                        <h2 class="card-title">Soroti</h2>
+                        <hr>
+                        <div class="table-responsive" style="height: 450px">
+                            <table class="table table-hover table-sm sticky">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>   DOB   </th>
+                                    <th>Gender</th>
+                                    <th>Village</th>
+                                    <th>School</th>
+                                    <th>Family</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == 'soroti']}" th:class="${iterStat.odd}? 'odd'">
+                                    <td th:text="${child.getId()}">26475934</td>
+                                    <td th:text="${child.getName()}">XYZ</td>
+                                    <td th:text="${child.getAge()}">2.41</td>
+                                    <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                    <td th:text="${child.getSex()}">Male</td>
+                                    <td th:text="${child.getVillage()}">ABC</td>
+                                    <td th:text="${child.getSchool()}">CDE</td>
+                                    <td th:text="${child.getFamily()}">FGH</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--            Busia -->
+            <div class="col-1"></div>
+            <div class="col-5">
+                <div class="card m-5" style="height: 600px; width: 600px">
+                    <div class="card-body">
+                        <h2 class="card-title">Busia</h2>
+                        <hr>
+                        <div class="table-responsive" style="height: 450px">
+                            <table class="table table-hover table-sm sticky">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>   DOB   </th>
+                                    <th>Gender</th>
+                                    <th>Village</th>
+                                    <th>School</th>
+                                    <th>Family</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == 'busia']}" th:class="${iterStat.odd}? 'odd'">
+                                    <td th:text="${child.getId()}">26475934</td>
+                                    <td th:text="${child.getName()}">XYZ</td>
+                                    <td th:text="${child.getAge()}">2.41</td>
+                                    <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                    <td th:text="${child.getSex()}">Male</td>
+                                    <td th:text="${child.getVillage()}">ABC</td>
+                                    <td th:text="${child.getSchool()}">CDE</td>
+                                    <td th:text="${child.getFamily()}">FGH</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--            Lango -->
+            <div class="col-1"></div>
+            <div class="col-5">
+                <div class="card m-5" style="height: 600px; width: 600px">
+                    <div class="card-body">
+                        <h2 class="card-title">Lango</h2>
+                        <hr>
+                        <div class="table-responsive" style="height: 450px">
+                            <table class="table table-hover table-sm sticky">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>   DOB   </th>
+                                    <th>Gender</th>
+                                    <th>Village</th>
+                                    <th>School</th>
+                                    <th>Family</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == 'lango']}" th:class="${iterStat.odd}? 'odd'">
+                                    <td th:text="${child.getId()}">26475934</td>
+                                    <td th:text="${child.getName()}">XYZ</td>
+                                    <td th:text="${child.getAge()}">2.41</td>
+                                    <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                    <td th:text="${child.getSex()}">Male</td>
+                                    <td th:text="${child.getVillage()}">ABC</td>
+                                    <td th:text="${child.getSchool()}">CDE</td>
+                                    <td th:text="${child.getFamily()}">FGH</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--            Acholi -->
+            <div class="col-1"></div>
+            <div class="col-5">
+                <div class="card m-5" style="height: 600px; width: 600px">
+                    <div class="card-body">
+                        <h2 class="card-title">Acholi</h2>
+                        <hr>
+                        <div class="table-responsive" style="height: 450px">
+                            <table class="table table-hover table-sm sticky">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>   DOB   </th>
+                                    <th>Gender</th>
+                                    <th>Village</th>
+                                    <th>School</th>
+                                    <th>Family</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == 'acholi']}" th:class="${iterStat.odd}? 'odd'">
+                                    <td th:text="${child.getId()}">26475934</td>
+                                    <td th:text="${child.getName()}">XYZ</td>
+                                    <td th:text="${child.getAge()}">2.41</td>
+                                    <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                    <td th:text="${child.getSex()}">Male</td>
+                                    <td th:text="${child.getVillage()}">ABC</td>
+                                    <td th:text="${child.getSchool()}">CDE</td>
+                                    <td th:text="${child.getFamily()}">FGH</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--            Masindi -->
+            <div class="col-1"></div>
+            <div class="col-5">
+                <div class="card m-5" style="height: 600px; width: 600px">
+                    <div class="card-body">
+                        <h2 class="card-title">Masindi</h2>
+                        <hr>
+                        <div class="table-responsive" style="height: 450px">
+                            <table class="table table-hover table-sm sticky">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>   DOB   </th>
+                                    <th>Gender</th>
+                                    <th>Village</th>
+                                    <th>School</th>
+                                    <th>Family</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == 'masindi']}" th:class="${iterStat.odd}? 'odd'">
+                                    <td th:text="${child.getId()}">26475934</td>
+                                    <td th:text="${child.getName()}">XYZ</td>
+                                    <td th:text="${child.getAge()}">2.41</td>
+                                    <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                    <td th:text="${child.getSex()}">Male</td>
+                                    <td th:text="${child.getVillage()}">ABC</td>
+                                    <td th:text="${child.getSchool()}">CDE</td>
+                                    <td th:text="${child.getFamily()}">FGH</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--            Kampala -->
+            <div class="col-1"></div>
+            <div class="col-5">
+                <div class="card m-5" style="height: 600px; width: 600px">
+                    <div class="card-body">
+                        <h2 class="card-title">Kampala</h2>
+                        <hr>
+                        <div class="table-responsive" style="height: 450px">
+                            <table class="table table-hover table-sm sticky">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>   DOB   </th>
+                                    <th>Gender</th>
+                                    <th>Village</th>
+                                    <th>School</th>
+                                    <th>Family</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == 'kampala']}" th:class="${iterStat.odd}? 'odd'">
+                                    <td th:text="${child.getId()}">26475934</td>
+                                    <td th:text="${child.getName()}">XYZ</td>
+                                    <td th:text="${child.getAge()}">2.41</td>
+                                    <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                    <td th:text="${child.getSex()}">Male</td>
+                                    <td th:text="${child.getVillage()}">ABC</td>
+                                    <td th:text="${child.getSchool()}">CDE</td>
+                                    <td th:text="${child.getFamily()}">FGH</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--            Jinja -->
+            <div class="col-1"></div>
+            <div class="col-5">
+                <div class="card m-5" style="height: 600px; width: 600px">
+                    <div class="card-body">
+                        <h2 class="card-title">Jinja</h2>
+                        <hr>
+                        <div class="table-responsive" style="height: 450px">
+                            <table class="table table-hover table-sm sticky">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>   DOB   </th>
+                                    <th>Gender</th>
+                                    <th>Village</th>
+                                    <th>School</th>
+                                    <th>Family</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == 'jinja']}" th:class="${iterStat.odd}? 'odd'">
+                                    <td th:text="${child.getId()}">26475934</td>
+                                    <td th:text="${child.getName()}">XYZ</td>
+                                    <td th:text="${child.getAge()}">2.41</td>
+                                    <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                    <td th:text="${child.getSex()}">Male</td>
+                                    <td th:text="${child.getVillage()}">ABC</td>
+                                    <td th:text="${child.getSchool()}">CDE</td>
+                                    <td th:text="${child.getFamily()}">FGH</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--            Kiboga -->
+            <div class="col-1"></div>
+            <div class="col-5">
+                <div class="card m-5" style="height: 600px; width: 600px">
+                    <div class="card-body">
+                        <h2 class="card-title">Kiboga</h2>
+                        <hr>
+                        <div class="table-responsive" style="height: 450px">
+                            <table class="table table-hover table-sm sticky">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>   DOB   </th>
+                                    <th>Gender</th>
+                                    <th>Village</th>
+                                    <th>School</th>
+                                    <th>Family</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == 'kiboga']}" th:class="${iterStat.odd}? 'odd'">
+                                    <td th:text="${child.getId()}">26475934</td>
+                                    <td th:text="${child.getName()}">XYZ</td>
+                                    <td th:text="${child.getAge()}">2.41</td>
+                                    <td th:text="${child.getDateOfBirth()}">06/04/2021</td>
+                                    <td th:text="${child.getSex()}">Male</td>
+                                    <td th:text="${child.getVillage()}">ABC</td>
+                                    <td th:text="${child.getSchool()}">CDE</td>
+                                    <td th:text="${child.getFamily()}">FGH</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--            <tr th:each="partner : ${localPartners}">-->
+<!--                <div class="col-1"></div>-->
+<!--                <div class="col-5">-->
+<!--                    <div class="card m-5" style="height: 600px">-->
+<!--                        <div class="card-body">-->
+<!--                            <h2 class="card-title"> ${partner.getValue()} </h2>-->
+<!--                            <hr>-->
+<!--                            <div class="table-responsive" style="height: 450px">-->
+<!--                                <table class="table table-hover table-sm sticky">-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th>Id</th>-->
+<!--                                        <th>Name</th>-->
+<!--                                        <th>Age</th>-->
+<!--                                        <th>   DOB   </th>-->
+<!--                                        <th>Gender</th>-->
+<!--                                        <th>Village</th>-->
+<!--                                        <th>School</th>-->
+<!--                                        <th>Family</th>-->
+<!--                                        <th>Local Partner</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr th:each="child,iterStat : ${immediateChildren.?[partnerName == ${partner.getValue()}]}" th:class="${iterStat.odd}? 'odd'">-->
+<!--                                        <td th:text="${child.getId()}">26475934</td>-->
+<!--                                        <td th:text="${child.getName()}">XYZ</td>-->
+<!--                                        <td th:text="${child.getAge()}">2.41</td>-->
+<!--                                        <td th:text="${child.getDateOfBirth()}">06/04/2021</td>-->
+<!--                                        <td th:text="${child.getSex()}">Male</td>-->
+<!--                                        <td th:text="${child.getVillage()}">ABC</td>-->
+<!--                                        <td th:text="${child.getSchool()}">CDE</td>-->
+<!--                                        <td th:text="${child.getFamily()}">FGH</td>-->
+<!--                                        <td th:text="${child.getPartnerName()}">FGH</td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </tr>-->
+
+            <div class="col-1"></div>
+        </div>
+</div>
+</body>
+</div>
+</html>

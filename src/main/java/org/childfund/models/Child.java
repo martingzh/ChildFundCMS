@@ -92,6 +92,9 @@ public class Child {
   @JsonProperty("_submission_time")
   private String submissionTime;
 
+  @JsonProperty("group_general/Local_Partner_Name")
+  private String partnerName;
+
   public String getId() {
     return id;
   }
@@ -134,6 +137,10 @@ public class Child {
 
   public String getFamily() {
     return family;
+  }
+
+  public String getPartnerName() {
+    return partnerName;
   }
 
   public void setId(String id) {
@@ -190,6 +197,10 @@ public class Child {
 
   public void setFamily(String family) {
     this.family = family;
+  }
+
+  public void setPartnerName(String partnerName) {
+    this.partnerName = partnerName;
   }
 
   public List<Attachment> getAttachments() {

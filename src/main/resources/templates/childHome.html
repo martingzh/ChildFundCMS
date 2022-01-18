@@ -64,6 +64,7 @@
                             </tr>
                             </thead>
                             <tbody>
+<!--                            <tr th:each="child,iterStat : ${children}" th:class="${iterStat.odd}? 'odd'">-->
                             <tr th:each="child,iterStat : ${children}" th:class="${iterStat.odd}? 'odd'">
                                 <td th:text="${child.getId()}">26475934</td>
                                 <td th:text="${child.getName()}">XYZ</td>
